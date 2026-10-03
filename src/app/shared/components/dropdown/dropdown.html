@@ -7,6 +7,8 @@
   [attr.aria-expanded]="isOpen()"
   [attr.aria-controls]="listboxId"
   [attr.aria-activedescendant]="activeOptionId()"
+  [attr.aria-describedby]="ariaDescribedBy()"
+  [disabled]="isDisabled()"
   (click)="toggle()"
   (keydown)="handleKeydown($event)"
 >
@@ -31,4 +33,7 @@
       </li>
     }
   </ul>
+}
+@if (selectedLabel(); as selectedOptionLabel) {
+  <p class="dropdown__selection">{{ selectedOptionLabel }}</p>
 }

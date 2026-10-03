@@ -24,11 +24,14 @@ export class Dropdown {
   readonly label = input.required<string>();
   readonly options = input.required<DropdownOption[]>();
   readonly selectedValue = model<DropdownValue>(null);
+  readonly isDisabled = input<boolean>(false);
+  readonly ariaDescribedBy = input<string | null>(null);
 
   protected readonly listboxId = `dropdown-listbox-${nextDropdownId++}`;
   protected readonly isOpen = signal<boolean>(false);
   protected readonly activeIndex = signal<number>(NO_ACTIVE_OPTION);
   protected readonly activeOptionId = computed<string | null>(() => this.getActiveOptionId());
+  protected readonly selectedLabel = computed<string | null>(() => this.findSelectedLabel());
 
   /** Returns the element id of the option at the given position. */
   protected getOptionId(index: number): string {
@@ -117,5 +120,14 @@ export class Dropdown {
   private getActiveOptionId(): string | null {
     const hasActiveOption = this.isOpen() && this.activeIndex() !== NO_ACTIVE_OPTION;
     return hasActiveOption ? this.getOptionId(this.activeIndex()) : null;
+  }
+
+  /** Returns the label of the selected option; null means nothing is shown below the trigger. */
+  private findSelectedLabel(): string | null {
+    if (this.selectedValue() === null) {
+      return null;
+    }
+    const selectedOption = this.options().find((option) => option.value === this.selectedValue());
+    return selectedOption?.label ?? null;
   }
 }

@@ -1,0 +1,11 @@
+<app-dropdown
+  label="Choose category"
+  [options]="categoryOptions()"
+  [selectedValue]="selectedCategoryId()"
+  [isDisabled]="isDisabled()"
+  [ariaDescribedBy]="hasError() ? errorId : null"
+  (selectedValueChange)="selectCategory($event)"
+/>
+@if (hasError()) {
+  <p class="category-select__error" [id]="errorId">Please choose a category.</p>
+}

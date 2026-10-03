@@ -4,6 +4,7 @@
 $dropdown-radius: 6px;
 $dropdown-trigger-padding: 4px 6px 4px 10px;
 $dropdown-trigger-line-height: 23px;
+$dropdown-trigger-height: 32px;
 $dropdown-icon-size: 24px;
 $dropdown-menu-offset: 4px;
 $dropdown-menu-padding: 8px 4px;
@@ -12,10 +13,13 @@ $dropdown-option-padding: 4px;
 $dropdown-option-line-height: 18px;
 $dropdown-option-letter-spacing: 0.02em;
 $dropdown-menu-layer: 1;
+$dropdown-selection-padding: 0 10px;
 
 :host {
   position: relative;
-  display: block;
+  display: flex;
+  flex-direction: column;
+  gap: $dropdown-menu-offset;
   font-family: $font-family-secondary;
 }
 
@@ -36,8 +40,12 @@ $dropdown-menu-layer: 1;
     line-height: $dropdown-trigger-line-height;
     cursor: pointer;
 
-    &:hover {
+    &:hover:not(:disabled) {
       background-color: rgba($color-neutral-grey, 0.12);
+    }
+
+    &:disabled {
+      cursor: not-allowed;
     }
   }
 
@@ -48,7 +56,7 @@ $dropdown-menu-layer: 1;
 
   &__menu {
     position: absolute;
-    top: calc(100% + #{$dropdown-menu-offset});
+    top: $dropdown-trigger-height + $dropdown-menu-offset;
     left: 0;
     z-index: $dropdown-menu-layer;
     display: flex;
@@ -78,9 +86,19 @@ $dropdown-menu-layer: 1;
       background-color: $color-bg-card-hover;
     }
   }
+
+  &__selection {
+    margin: 0;
+    padding: $dropdown-selection-padding;
+    color: $color-primary-orange;
+    font-size: $font-size-s;
+    font-weight: $font-weight-regular;
+    line-height: $dropdown-option-line-height;
+    letter-spacing: $dropdown-option-letter-spacing;
+  }
 }
 
-.dropdown__trigger:hover .dropdown__arrow {
+.dropdown__trigger:hover:not(:disabled) .dropdown__arrow {
   color: $color-primary-orange;
 }
 

@@ -1,0 +1,15 @@
+@use '../../../../styles/abstracts/mixins' as *;
+
+$category-select-width: 206px;
+$category-select-gap: 4px;
+
+:host {
+  display: flex;
+  flex-direction: column;
+  gap: $category-select-gap;
+  width: $category-select-width;
+}
+
+.category-select__error {
+  @include form-error-text;
+}
