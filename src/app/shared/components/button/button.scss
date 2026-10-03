@@ -1,0 +1,126 @@
+@use 'sass:map';
+@use '../../../../styles/abstracts/colors' as *;
+@use '../../../../styles/abstracts/typography' as *;
+@use '../../../../styles/abstracts/mixins' as *;
+
+$icon-size: 24px;
+$primary-icon-transition: 300ms ease-out;
+
+// Values taken from the Figma components "primary/secondary/tertiary/filter button".
+$button-variants: (
+  primary: (
+    background: $color-secondary-orange,
+    background-hover: $color-primary-orange,
+    color: $color-text-dark,
+    font-size: $font-size-l,
+    font-weight: $font-weight-bold,
+    padding: 12px 16px,
+    radius: 10px,
+    icon-gap: 10px,
+  ),
+  secondary: (
+    background: rgba($color-primary-orange, 0.3),
+    background-hover: rgba($color-primary-orange, 0.6),
+    color: $color-text-light,
+    font-size: $font-size-m,
+    font-weight: $font-weight-bold,
+    padding: 8px 12px,
+    radius: 10px,
+    icon-gap: 10px,
+  ),
+  filter: (
+    background: $color-light-orange,
+    background-hover: $color-secondary-orange,
+    background-active: $color-primary-orange,
+    color: $color-primary-purple,
+    font-size: $font-size-m,
+    font-weight: $font-weight-regular,
+    padding: 2px 10px,
+    radius: 20px,
+    icon-gap: 10px,
+  ),
+  tertiary: (
+    background: transparent,
+    background-hover: rgba($color-bg-card, 0.2),
+    color: $color-text-light,
+    font-size: $font-size-m,
+    font-weight: $font-weight-bold,
+    padding: 8px 12px,
+    radius: 0,
+    icon-gap: 4px,
+  ),
+);
+
+.button {
+  @include flex-center;
+  border: none;
+  font-family: $font-family-base;
+  line-height: $line-height-tight;
+  cursor: pointer;
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+
+  &__content {
+    @include flex-center;
+  }
+
+  &__icon {
+    flex-shrink: 0;
+    width: $icon-size;
+    height: $icon-size;
+  }
+}
+
+@each $name, $variant in $button-variants {
+  .button--#{$name} {
+    padding: map.get($variant, padding);
+    border-radius: map.get($variant, radius);
+    background-color: map.get($variant, background);
+    color: map.get($variant, color);
+    font-size: map.get($variant, font-size);
+    font-weight: map.get($variant, font-weight);
+
+    @include hover-enabled {
+      background-color: map.get($variant, background-hover);
+    }
+
+    .button__icon {
+      margin-left: map.get($variant, icon-gap);
+    }
+
+    @if map.has-key($variant, background-active) {
+      &.button--active {
+        background-color: map.get($variant, background-active);
+      }
+    }
+  }
+}
+
+// Figma "Smart animate": the icon slides in on hover only.
+.button--primary {
+  transition: background-color $primary-icon-transition;
+
+  .button__icon {
+    width: 0;
+    margin-left: 0;
+    opacity: 0;
+    transition:
+      width $primary-icon-transition,
+      margin-left $primary-icon-transition,
+      opacity $primary-icon-transition;
+  }
+
+  @include hover-enabled {
+    .button__icon {
+      width: $icon-size;
+      margin-left: map.get($button-variants, primary, icon-gap);
+      opacity: 1;
+    }
+  }
+}
+
+.button--tertiary .button__content {
+  border-bottom: 1px solid currentColor;
+}

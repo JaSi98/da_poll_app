@@ -1,0 +1,12 @@
+@mixin flex-center {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+
+// Disabled buttons must not give hover feedback.
+@mixin hover-enabled {
+  &:hover:not(:disabled) {
+    @content;
+  }
+}

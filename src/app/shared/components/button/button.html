@@ -1,0 +1,17 @@
+<button
+  class="button"
+  [class]="modifierClasses()"
+  [type]="type()"
+  [disabled]="isDisabled()"
+  [attr.aria-pressed]="ariaPressed()"
+  (click)="emitClick()"
+>
+  <span class="button__content">
+    <span class="button__label">{{ label() }}</span>
+    @if (hasIcon()) {
+      <svg class="button__icon" viewBox="0 0 24 24" aria-hidden="true">
+        <use [attr.href]="iconHref()"></use>
+      </svg>
+    }
+  </span>
+</button>
