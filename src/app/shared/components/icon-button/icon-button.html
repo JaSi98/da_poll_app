@@ -1,0 +1,12 @@
+<button
+  class="icon-button"
+  type="button"
+  [class.icon-button--editing]="isEditingActive()"
+  [attr.aria-label]="ariaLabel()"
+  [attr.aria-pressed]="ariaPressed()"
+  (click)="emitClick()"
+>
+  <svg class="icon-button__icon" viewBox="0 0 24 24" aria-hidden="true">
+    <use [attr.href]="iconHref()"></use>
+  </svg>
+</button>

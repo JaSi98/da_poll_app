@@ -1,0 +1,37 @@
+@use '../../../../styles/abstracts/colors' as *;
+@use '../../../../styles/abstracts/mixins' as *;
+
+// Values taken from the Figma components "Delete" and "Edit".
+$icon-button-size: 26px;
+$icon-button-radius: 3px;
+$icon-size: 24px;
+
+@mixin highlighted {
+  background-color: $color-secondary-orange;
+  color: $color-primary-purple;
+}
+
+.icon-button {
+  @include flex-center;
+  width: $icon-button-size;
+  height: $icon-button-size;
+  padding: 0;
+  border: none;
+  border-radius: $icon-button-radius;
+  background-color: transparent;
+  color: $color-text-light;
+  cursor: pointer;
+
+  @include hover-enabled {
+    @include highlighted;
+  }
+
+  &--editing {
+    @include highlighted;
+  }
+
+  &__icon {
+    width: $icon-size;
+    height: $icon-size;
+  }
+}
