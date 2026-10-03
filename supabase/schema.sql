@@ -1,5 +1,13 @@
--- Tables for surveys, their questions and answers. Run once in the Supabase SQL editor.
--- Requires the existing table public.categories (id int8, name text).
+-- Tables for categories, surveys, their questions and answers. Run once in the Supabase SQL editor.
+
+create table public.categories (
+  id bigint generated always as identity primary key,
+  name text not null
+);
+
+alter table public.categories enable row level security;
+
+create policy "Anyone can read categories" on public.categories for select to anon using (true);
 
 create table public.surveys (
   id bigint generated always as identity primary key,

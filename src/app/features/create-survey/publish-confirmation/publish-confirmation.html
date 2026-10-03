@@ -1,0 +1,15 @@
+@if (surveyId() !== null) {
+  <div class="publish-confirmation">
+    <p class="publish-confirmation__text">Your survey is now published</p>
+    <button
+      class="publish-confirmation__close"
+      type="button"
+      aria-label="Close and open the survey"
+      (click)="openSurvey()"
+    >
+      <svg class="publish-confirmation__icon" viewBox="0 0 24 24" aria-hidden="true">
+        <use href="assets/icons/close.svg#icon"></use>
+      </svg>
+    </button>
+  </div>
+}

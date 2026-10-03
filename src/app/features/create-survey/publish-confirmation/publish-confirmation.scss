@@ -1,0 +1,77 @@
+@use '../../../../styles/abstracts/colors' as *;
+@use '../../../../styles/abstracts/typography' as *;
+
+$confirmation-offset: 24px;
+$confirmation-width: 357px;
+$confirmation-padding: 14px 24px 14px 26px;
+$confirmation-radius: 5px 50px 5px 5px;
+$confirmation-gap: 15px;
+$confirmation-text-width: 268px;
+$confirmation-line-height: 29px;
+$confirmation-letter-spacing: 0.02em;
+$confirmation-close-offset: 5px;
+$confirmation-icon-size: 24px;
+$confirmation-slide-in: 300ms ease-out;
+$confirmation-layer: 10;
+
+:host {
+  position: fixed;
+  top: $confirmation-offset;
+  right: $confirmation-offset;
+  z-index: $confirmation-layer;
+}
+
+.publish-confirmation {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: $confirmation-gap;
+  box-sizing: border-box;
+  width: $confirmation-width;
+  padding: $confirmation-padding;
+  border-radius: $confirmation-radius;
+  background-color: $color-light-orange;
+  color: $color-primary-purple;
+  animation: slide-in-from-right $confirmation-slide-in;
+
+  &__text {
+    width: $confirmation-text-width;
+    margin: 0;
+    font-family: $font-family-display;
+    font-size: $font-size-xl;
+    font-weight: $font-weight-regular;
+    line-height: $confirmation-line-height;
+    letter-spacing: $confirmation-letter-spacing;
+  }
+
+  &__close {
+    display: flex;
+    margin-top: $confirmation-close-offset;
+    padding: 0;
+    border: none;
+    background: none;
+    color: inherit;
+    cursor: pointer;
+  }
+
+  &__icon {
+    width: $confirmation-icon-size;
+    height: $confirmation-icon-size;
+  }
+}
+
+@keyframes slide-in-from-right {
+  from {
+    transform: translateX(calc(100% + #{$confirmation-offset}));
+  }
+
+  to {
+    transform: translateX(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .publish-confirmation {
+    animation: none;
+  }
+}
