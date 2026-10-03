@@ -1,0 +1,16 @@
+<article
+  class="highlights-card"
+  (mouseenter)="setHovered(true)"
+  (mouseleave)="setHovered(false)"
+>
+  <a class="highlights-card__link" [routerLink]="surveyLink()">
+    <header class="highlights-card__header">
+      <p class="highlights-card__category">{{ survey().category }}</p>
+      <h3 class="highlights-card__title">{{ survey().title }}</h3>
+    </header>
+    @let remainingDays = daysLeft();
+    @if (remainingDays !== null) {
+      <app-deadline-badge [daysLeft]="remainingDays" [isHighlighted]="isHovered()" />
+    }
+  </a>
+</article>

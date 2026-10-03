@@ -1,0 +1,59 @@
+@use '../../../../styles/abstracts/colors' as *;
+@use '../../../../styles/abstracts/typography' as *;
+
+$highlights-card-width: 321px;
+$highlights-card-height: 310px;
+$highlights-card-padding: 40px 18px;
+$highlights-card-corner-radius: 80px;
+$highlights-card-content-width: 233px;
+$highlights-card-header-gap: 8px;
+$highlights-card-category-line-height: 18px;
+$highlights-card-title-line-height: 33px;
+$highlights-card-transition: 100ms ease-out;
+
+.highlights-card {
+  box-sizing: border-box;
+  width: $highlights-card-width;
+  height: $highlights-card-height;
+  padding: $highlights-card-padding;
+  border-top-right-radius: $highlights-card-corner-radius;
+  background-color: $color-bg-card;
+  transition: background-color $highlights-card-transition;
+
+  &:hover {
+    background-color: $color-bg-card-hover;
+  }
+
+  &__link {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: $highlights-card-content-width;
+    height: 100%;
+    margin-inline: auto;
+    color: $color-primary-purple;
+    font-family: $font-family-secondary;
+    text-decoration: none;
+  }
+
+  &__header {
+    display: flex;
+    flex-direction: column;
+    gap: $highlights-card-header-gap;
+  }
+
+  &__category {
+    margin: 0;
+    font-size: $font-size-s;
+    font-weight: $font-weight-semibold;
+    line-height: $highlights-card-category-line-height;
+  }
+
+  &__title {
+    margin: 0;
+    font-size: $font-size-xl;
+    font-weight: $font-weight-bold;
+    line-height: $highlights-card-title-line-height;
+  }
+}
