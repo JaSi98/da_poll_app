@@ -1,0 +1,39 @@
+@use '../../../../styles/abstracts/colors' as *;
+@use '../../../../styles/abstracts/typography' as *;
+
+$answer-option-padding: 0 4px;
+$answer-option-radius: 3px;
+$answer-option-content-gap: 4px;
+$answer-option-line-height: 20px;
+
+:host {
+  display: block;
+}
+
+.answer-option {
+  display: flex;
+  padding: $answer-option-padding;
+  border-radius: $answer-option-radius;
+  color: $color-primary-purple;
+  font-family: $font-family-secondary;
+  font-size: $font-size-m;
+  line-height: $answer-option-line-height;
+
+  &:hover:not(.answer-option--disabled) {
+    background-color: rgba($color-secondary-orange, 0.4);
+  }
+
+  &__content {
+    display: flex;
+    gap: $answer-option-content-gap;
+  }
+
+  &__letter {
+    flex-shrink: 0;
+    font-weight: $font-weight-bold;
+  }
+
+  &__text {
+    font-weight: $font-weight-regular;
+  }
+}

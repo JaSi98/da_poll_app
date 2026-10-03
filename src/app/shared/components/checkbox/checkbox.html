@@ -1,7 +1,12 @@
-<label class="checkbox" [class.checkbox--disabled]="isDisabled()">
+<label
+  class="checkbox"
+  [class.checkbox--disabled]="isDisabled()"
+  [class.checkbox--hoverable]="hasHoverEffect()"
+>
   <input
     class="checkbox__input"
-    type="checkbox"
+    [type]="type()"
+    [attr.name]="name()"
     [checked]="checked()"
     [disabled]="isDisabled()"
     [attr.aria-label]="ariaLabel()"

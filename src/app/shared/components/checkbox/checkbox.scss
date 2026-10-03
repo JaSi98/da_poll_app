@@ -9,9 +9,15 @@ $checkbox-label-gap: 16px;
 $checkbox-check-width: 10px;
 $checkbox-check-height: 8px;
 
+// Lets a parent stretch the label, e.g. to make a whole answer row clickable.
+:host {
+  display: inline-flex;
+}
+
 .checkbox {
   position: relative;
   display: inline-flex;
+  flex-grow: 1;
   align-items: center;
   gap: $checkbox-label-gap;
   cursor: pointer;
@@ -46,7 +52,7 @@ $checkbox-check-height: 8px;
   }
 }
 
-.checkbox:hover .checkbox__input:not(:checked, :disabled) + .checkbox__box {
+.checkbox--hoverable:hover .checkbox__input:not(:checked, :disabled) + .checkbox__box {
   border-color: $color-bg-card;
   background-color: rgba($color-secondary-orange, 0.6);
 }
