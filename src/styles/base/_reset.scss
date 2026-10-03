@@ -11,4 +11,6 @@ body {
   margin: 0;
   color: $color-primary-purple;
   font-family: $font-family-secondary;
+  // User texts may contain very long words or links; they break instead of widening the layout.
+  overflow-wrap: anywhere;
 }

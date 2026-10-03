@@ -43,11 +43,13 @@ export class CreateQuestion {
     this.answers.push(createAnswerControl());
   }
 
-  /** Deletes the answer at the given position if the minimum is not reached yet. */
-  protected removeAnswer(answerIndex: number): void {
+  /** Deletes the answer, or only clears its text if the minimum number of answers is reached. */
+  protected removeOrClearAnswer(answerIndex: number): void {
     if (this.canRemoveAnswer) {
       this.answers.removeAt(answerIndex);
+      return;
     }
+    this.answers.at(answerIndex).setValue('');
   }
 
   /** Stores whether voters may choose more than one answer. */

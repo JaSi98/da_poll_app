@@ -1,7 +1,10 @@
 # Serves index.html for every route of the Angular app, so reloads and direct links work.
+# FallbackResource needs no mod_rewrite; the rewrite rules below cover servers that support it.
+FallbackResource /angular-projects/poll-app/index.html
+
 <IfModule mod_rewrite.c>
   RewriteEngine On
-  RewriteBase /poll-app/
+  RewriteBase /angular-projects/poll-app/
 
   # Existing files and folders (scripts, styles, images) are delivered directly.
   RewriteCond %{REQUEST_FILENAME} -f [OR]

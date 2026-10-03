@@ -46,10 +46,9 @@
           />
           <app-icon-button
             class="create-question__remove"
-            [class.create-question__remove--hidden]="!canRemoveAnswer"
             variant="delete"
-            [ariaLabel]="'Delete answer ' + letter"
-            (buttonClick)="removeAnswer(answerIndex)"
+            [ariaLabel]="(canRemoveAnswer ? 'Delete answer ' : 'Clear answer ') + letter"
+            (buttonClick)="removeOrClearAnswer(answerIndex)"
           />
         </li>
       }

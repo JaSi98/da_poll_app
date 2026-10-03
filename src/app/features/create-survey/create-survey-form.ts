@@ -1,4 +1,11 @@
-import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormArray,
+  FormControl,
+  FormGroup,
+  ValidationErrors,
+  Validators,
+} from '@angular/forms';
 
 import { NewQuestion, NewSurvey } from '../../shared/models/new-survey';
 
@@ -22,16 +29,22 @@ export interface SurveyForm {
 
 export type SurveyFormGroup = FormGroup<SurveyForm>;
 
+/** Rejects empty text and text that consists only of whitespace. */
+export function requiredText(control: AbstractControl<string | null>): ValidationErrors | null {
+  const hasText = (control.value ?? '').trim().length > 0;
+  return hasText ? null : { required: true };
+}
+
 /** Creates a required, empty answer field. */
 export function createAnswerControl(): FormControl<string> {
-  return new FormControl('', { nonNullable: true, validators: Validators.required });
+  return new FormControl('', { nonNullable: true, validators: requiredText });
 }
 
 /** Creates a question with an empty text and the minimum number of answers. */
 export function createQuestionFormGroup(): QuestionFormGroup {
   const answers = Array.from({ length: MIN_ANSWER_COUNT }, () => createAnswerControl());
   return new FormGroup<QuestionForm>({
-    text: new FormControl('', { nonNullable: true, validators: Validators.required }),
+    text: new FormControl('', { nonNullable: true, validators: requiredText }),
     isMultipleChoice: new FormControl(false, { nonNullable: true }),
     answers: new FormArray(answers),
   });
@@ -40,7 +53,7 @@ export function createQuestionFormGroup(): QuestionFormGroup {
 /** Creates an empty survey form with one question. */
 export function createSurveyFormGroup(): SurveyFormGroup {
   return new FormGroup<SurveyForm>({
-    title: new FormControl('', { nonNullable: true, validators: Validators.required }),
+    title: new FormControl('', { nonNullable: true, validators: requiredText }),
     endDate: new FormControl('', { nonNullable: true }),
     categoryId: new FormControl<number | null>(null, Validators.required),
     description: new FormControl('', { nonNullable: true }),

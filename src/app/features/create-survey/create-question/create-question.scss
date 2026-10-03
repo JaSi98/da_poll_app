@@ -86,10 +86,6 @@ $create-question-add-answer-indent: 20px;
     margin-left: $create-question-answer-gap;
   }
 
-  &__remove--hidden {
-    visibility: hidden;
-  }
-
   &__add-answer {
     align-self: flex-start;
     margin-left: $create-question-add-answer-indent;
