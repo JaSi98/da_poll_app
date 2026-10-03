@@ -1,0 +1,65 @@
+@use '../../../../styles/abstracts/colors' as *;
+@use '../../../../styles/abstracts/typography' as *;
+
+$text-field-gap: 4px;
+$text-field-label-line-height: 22px;
+$text-field-optional-spacing: 0.25em;
+$text-field-height: 37px;
+$text-field-multiline-height: 108px;
+$text-field-padding: 7px 13px;
+$text-field-radius: 5px 20px 5px 5px;
+$text-field-line-height: 20px;
+$text-field-error-line-height: 18px;
+
+:host {
+  display: flex;
+  flex-direction: column;
+  gap: $text-field-gap;
+  font-family: $font-family-secondary;
+}
+
+.text-field {
+  &__label {
+    color: $color-text-light;
+    font-size: $font-size-l;
+    font-weight: $font-weight-bold;
+    line-height: $text-field-label-line-height;
+  }
+
+  &__optional {
+    margin-left: $text-field-optional-spacing;
+    font-weight: $font-weight-regular;
+  }
+
+  &__control {
+    box-sizing: border-box;
+    width: 100%;
+    height: $text-field-height;
+    padding: $text-field-padding;
+    border: none;
+    border-radius: $text-field-radius;
+    outline: none;
+    background-color: $color-text-light;
+    color: $color-primary-purple;
+    font-family: inherit;
+    font-size: $font-size-m;
+    font-weight: $font-weight-regular;
+    line-height: $text-field-line-height;
+
+    &:focus {
+      background-color: $color-light-orange;
+    }
+
+    &--multiline {
+      height: $text-field-multiline-height;
+      resize: none;
+    }
+  }
+
+  &__error {
+    margin: 0;
+    color: $color-primary-orange;
+    font-size: $font-size-s;
+    line-height: $text-field-error-line-height;
+  }
+}

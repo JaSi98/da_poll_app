@@ -1,0 +1,37 @@
+@if (label(); as labelText) {
+  <label class="text-field__label" [for]="fieldId">
+    {{ labelText }}
+    @if (isOptional()) {
+      <span class="text-field__optional">(optional)</span>
+    }
+  </label>
+}
+@if (isMultiline()) {
+  <textarea
+    class="text-field__control text-field__control--multiline"
+    [id]="fieldId"
+    [value]="value()"
+    [disabled]="isDisabled()"
+    [attr.aria-label]="ariaLabel()"
+    [attr.aria-invalid]="hasError()"
+    [attr.aria-describedby]="hasError() ? errorId : null"
+    (input)="updateValue($event)"
+    (blur)="markAsTouched()"
+  ></textarea>
+} @else {
+  <input
+    class="text-field__control"
+    [id]="fieldId"
+    [type]="type()"
+    [value]="value()"
+    [disabled]="isDisabled()"
+    [attr.aria-label]="ariaLabel()"
+    [attr.aria-invalid]="hasError()"
+    [attr.aria-describedby]="hasError() ? errorId : null"
+    (input)="updateValue($event)"
+    (blur)="markAsTouched()"
+  />
+}
+@if (hasError()) {
+  <p class="text-field__error" [id]="errorId">{{ errorMessage() }}</p>
+}
