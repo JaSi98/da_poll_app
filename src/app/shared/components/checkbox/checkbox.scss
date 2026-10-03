@@ -1,0 +1,57 @@
+@use '../../../../styles/abstracts/colors' as *;
+@use '../../../../styles/abstracts/mixins' as *;
+
+$checkbox-box-size: 15px;
+$checkbox-box-margin: 3px;
+$checkbox-border-width: 1.5px;
+$checkbox-radius: 3px;
+$checkbox-label-gap: 16px;
+$checkbox-check-width: 10px;
+$checkbox-check-height: 8px;
+
+.checkbox {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: $checkbox-label-gap;
+  cursor: pointer;
+
+  &--disabled {
+    cursor: default;
+  }
+
+  &__input {
+    @include visually-hidden;
+  }
+
+  &__box {
+    @include flex-center;
+    flex-shrink: 0;
+    box-sizing: border-box;
+    width: $checkbox-box-size;
+    height: $checkbox-box-size;
+    margin: $checkbox-box-margin;
+    border: $checkbox-border-width solid $color-primary-purple;
+    border-radius: $checkbox-radius;
+    color: $color-primary-purple;
+  }
+
+  &__check {
+    width: $checkbox-check-width;
+    height: $checkbox-check-height;
+  }
+
+  &__label:empty {
+    display: none;
+  }
+}
+
+.checkbox:hover .checkbox__input:not(:checked, :disabled) + .checkbox__box {
+  border-color: $color-bg-card;
+  background-color: rgba($color-secondary-orange, 0.6);
+}
+
+.checkbox__input:checked + .checkbox__box {
+  border-color: $color-primary-orange;
+  background-color: $color-primary-orange;
+}

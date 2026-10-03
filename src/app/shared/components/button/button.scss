@@ -6,7 +6,6 @@
 $icon-size: 24px;
 $primary-icon-transition: 300ms ease-out;
 
-// Values taken from the Figma components "primary/secondary/tertiary/filter button".
 $button-variants: (
   primary: (
     background: $color-secondary-orange,
@@ -98,7 +97,6 @@ $button-variants: (
   }
 }
 
-// Figma "Smart animate": the icon slides in on hover only.
 .button--primary {
   transition: background-color $primary-icon-transition;
 

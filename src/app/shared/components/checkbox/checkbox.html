@@ -1,0 +1,18 @@
+<label class="checkbox" [class.checkbox--disabled]="isDisabled()">
+  <input
+    class="checkbox__input"
+    type="checkbox"
+    [checked]="checked()"
+    [disabled]="isDisabled()"
+    [attr.aria-label]="ariaLabel()"
+    (change)="updateChecked($event)"
+  />
+  <span class="checkbox__box" aria-hidden="true">
+    @if (checked()) {
+      <svg class="checkbox__check" viewBox="0 0 10 8">
+        <use href="assets/icons/checkbox-check.svg#icon"></use>
+      </svg>
+    }
+  </span>
+  <span class="checkbox__label"><ng-content /></span>
+</label>
