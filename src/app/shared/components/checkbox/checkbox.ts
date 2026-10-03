@@ -1,6 +1,7 @@
 import { Component, input, model } from '@angular/core';
 
 export type CheckboxType = 'checkbox' | 'radio';
+export type CheckboxAlignment = 'center' | 'top';
 
 @Component({
   selector: 'app-checkbox',
@@ -13,6 +14,7 @@ export class Checkbox {
   readonly name = input<string | null>(null);
   readonly isDisabled = input<boolean>(false);
   readonly hasHoverEffect = input<boolean>(true);
+  readonly alignment = input<CheckboxAlignment>('center');
   readonly ariaLabel = input<string | null>(null);
 
   /** Syncs the checked state with the native input after a user change. */

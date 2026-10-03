@@ -1,0 +1,31 @@
+<section class="question">
+  <header class="question__header">
+    <h2 class="question__title">{{ questionNumber() }}. {{ question().text }}</h2>
+    @if (question().isMultipleChoice) {
+      <p class="question__hint">
+        <app-checkbox
+          aria-hidden="true"
+          [checked]="true"
+          [isDisabled]="true"
+          [hasHoverEffect]="false"
+        />
+        More than one answer is possible.
+      </p>
+    }
+  </header>
+  <ul class="question__answers">
+    @for (answer of question().answers; track answer.id) {
+      <li>
+        <app-answer
+          [answer]="answer"
+          [index]="$index"
+          [groupName]="question().id"
+          [isMultipleChoice]="question().isMultipleChoice"
+          [isDisabled]="isDisabled()"
+          [checked]="isAnswerSelected(answer.id)"
+          (checkedChange)="updateSelection(answer.id, $event)"
+        />
+      </li>
+    }
+  </ul>
+</section>

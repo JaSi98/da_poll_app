@@ -1,0 +1,52 @@
+@use '../../../../styles/abstracts/colors' as *;
+@use '../../../../styles/abstracts/typography' as *;
+
+$question-gap: 24px;
+$question-header-gap: 3px;
+$question-title-line-height: 23px;
+$question-hint-indent: 24px;
+$question-hint-gap: 3px;
+$question-hint-line-height: 17px;
+$question-answers-indent: 8px;
+$question-answers-gap: 8px;
+
+.question {
+  display: flex;
+  flex-direction: column;
+  gap: $question-gap;
+  color: $color-primary-purple;
+  font-family: $font-family-secondary;
+
+  &__header {
+    display: flex;
+    flex-direction: column;
+    gap: $question-header-gap;
+  }
+
+  &__title {
+    margin: 0;
+    font-size: $font-size-l;
+    font-weight: $font-weight-bold;
+    line-height: $question-title-line-height;
+  }
+
+  &__hint {
+    display: flex;
+    align-items: center;
+    gap: $question-hint-gap;
+    margin: 0;
+    padding-left: $question-hint-indent;
+    font-size: $font-size-s;
+    font-weight: $font-weight-regular;
+    line-height: $question-hint-line-height;
+  }
+
+  &__answers {
+    display: flex;
+    flex-direction: column;
+    gap: $question-answers-gap;
+    margin: 0;
+    padding: 0 0 0 $question-answers-indent;
+    list-style: none;
+  }
+}

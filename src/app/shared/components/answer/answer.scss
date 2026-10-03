@@ -1,31 +1,31 @@
 @use '../../../../styles/abstracts/colors' as *;
 @use '../../../../styles/abstracts/typography' as *;
 
-$answer-option-padding: 0 4px;
-$answer-option-radius: 3px;
-$answer-option-content-gap: 4px;
-$answer-option-line-height: 20px;
+$answer-padding: 0 4px;
+$answer-radius: 3px;
+$answer-content-gap: 4px;
+$answer-line-height: 20px;
 
 :host {
   display: block;
 }
 
-.answer-option {
+.answer {
   display: flex;
-  padding: $answer-option-padding;
-  border-radius: $answer-option-radius;
+  padding: $answer-padding;
+  border-radius: $answer-radius;
   color: $color-primary-purple;
   font-family: $font-family-secondary;
   font-size: $font-size-m;
-  line-height: $answer-option-line-height;
+  line-height: $answer-line-height;
 
-  &:hover:not(.answer-option--disabled) {
+  &:hover:not(.answer--disabled) {
     background-color: rgba($color-secondary-orange, 0.4);
   }
 
   &__content {
     display: flex;
-    gap: $answer-option-content-gap;
+    gap: $answer-content-gap;
   }
 
   &__letter {

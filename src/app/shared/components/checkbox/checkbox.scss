@@ -26,6 +26,10 @@ $checkbox-check-height: 8px;
     cursor: default;
   }
 
+  &--top-aligned {
+    align-items: flex-start;
+  }
+
   &__input {
     @include visually-hidden;
   }

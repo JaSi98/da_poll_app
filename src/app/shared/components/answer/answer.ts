@@ -5,12 +5,12 @@ import { getOptionLetter } from '../../utils/option-letter-utils';
 import { Checkbox, CheckboxType } from '../checkbox/checkbox';
 
 @Component({
-  selector: 'app-answer-option',
+  selector: 'app-answer',
   imports: [Checkbox],
-  styleUrl: './answer-option.scss',
-  templateUrl: './answer-option.html',
+  styleUrl: './answer.scss',
+  templateUrl: './answer.html',
 })
-export class AnswerOption {
+export class AnswerComponent {
   readonly answer = input.required<Answer>();
   readonly index = input.required<number>();
   readonly groupName = input.required<string>();

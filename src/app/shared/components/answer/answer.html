@@ -1,0 +1,15 @@
+<app-checkbox
+  class="answer"
+  [class.answer--disabled]="isDisabled()"
+  [type]="inputType()"
+  [name]="groupName()"
+  [hasHoverEffect]="false"
+  alignment="top"
+  [isDisabled]="isDisabled()"
+  [(checked)]="checked"
+>
+  <span class="answer__content">
+    <strong class="answer__letter">{{ optionLetter() }}.</strong>
+    <span class="answer__text">{{ answer().text }}</span>
+  </span>
+</app-checkbox>

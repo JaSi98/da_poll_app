@@ -2,6 +2,7 @@
   class="checkbox"
   [class.checkbox--disabled]="isDisabled()"
   [class.checkbox--hoverable]="hasHoverEffect()"
+  [class.checkbox--top-aligned]="alignment() === 'top'"
 >
   <input
     class="checkbox__input"
