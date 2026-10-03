@@ -1,0 +1,12 @@
+# Serves index.html for every route of the Angular app, so reloads and direct links work.
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /poll-app/
+
+  # Existing files and folders (scripts, styles, images) are delivered directly.
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^ - [L]
+
+  RewriteRule ^ index.html [L]
+</IfModule>

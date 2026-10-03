@@ -2,7 +2,8 @@
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "cli": {
-    "packageManager": "npm"
+    "packageManager": "npm",
+    "analytics": "63b05606-9f6c-42ad-8317-3e6df148e5b8"
   },
   "newProjectRoot": "projects",
   "projects": {
@@ -35,6 +36,7 @@
           },
           "configurations": {
             "production": {
+              "baseHref": "/poll-app/",
               "budgets": [
                 {
                   "type": "initial",
