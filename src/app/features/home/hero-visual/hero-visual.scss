@@ -1,0 +1,118 @@
+@use 'sass:list';
+@use 'sass:map';
+@use 'sass:math';
+
+$hero-visual-width: 426px;
+$hero-visual-height: 420px;
+$hero-visual-phone-size: 420px;
+$hero-visual-easing: ease-in-out;
+
+// Boxes are (left, top, width, height) inside the visual, at rest and while hovering.
+$hero-visual-elements: (
+  bubble: (
+    rest: (
+      76px,
+      97px,
+      105px,
+      76px,
+    ),
+    hover: (
+      14px,
+      59px,
+      177px,
+      115px,
+    ),
+    duration: 250ms,
+  ),
+  check: (
+    rest: (
+      277px,
+      258px,
+      80px,
+      81px,
+    ),
+    hover: (
+      326px,
+      255px,
+      94px,
+      95px,
+    ),
+    duration: 350ms,
+  ),
+);
+
+@mixin place-in-box($box) {
+  left: list.nth($box, 1);
+  top: list.nth($box, 2);
+  width: list.nth($box, 3);
+  height: list.nth($box, 4);
+}
+
+// Returns the transform that moves and scales an image from one box onto another.
+@function transform-between($from, $to) {
+  $offset-x: list.nth($to, 1) - list.nth($from, 1);
+  $offset-y: list.nth($to, 2) - list.nth($from, 2);
+  $scale-x: math.div(list.nth($to, 3), list.nth($from, 3));
+  $scale-y: math.div(list.nth($to, 4), list.nth($from, 4));
+  @return translate($offset-x, $offset-y) scale($scale-x, $scale-y);
+}
+
+.hero-visual {
+  position: relative;
+  width: $hero-visual-width;
+  height: $hero-visual-height;
+
+  > img {
+    position: absolute;
+    transform-origin: top left;
+  }
+
+  &__phone {
+    top: 0;
+    left: 0;
+    width: $hero-visual-phone-size;
+    height: $hero-visual-phone-size;
+  }
+}
+
+@each $name, $element in $hero-visual-elements {
+  $rest: map.get($element, rest);
+  $hover: map.get($element, hover);
+
+  .hero-visual__#{$name} {
+    transition:
+      transform map.get($element, duration) $hero-visual-easing,
+      opacity map.get($element, duration) $hero-visual-easing;
+
+    &--rest {
+      @include place-in-box($rest);
+    }
+
+    &--hover {
+      @include place-in-box($hover);
+      opacity: 0;
+      transform: transform-between($hover, $rest);
+    }
+  }
+
+  // Only devices with a real mouse get the motion; touch devices keep the resting state.
+  @media (hover: hover) and (pointer: fine) {
+    .hero-visual:hover .hero-visual__#{$name} {
+      &--rest {
+        opacity: 0;
+        transform: transform-between($rest, $hover);
+      }
+
+      &--hover {
+        opacity: 1;
+        transform: none;
+      }
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-visual > img {
+    transition: none;
+  }
+}
