@@ -15,6 +15,7 @@ $button-variants: (
     font-weight: $font-weight-bold,
     padding: 12px 16px,
     radius: 10px,
+    line-height: 24px,
     icon-gap: 10px,
   ),
   secondary: (
@@ -25,6 +26,7 @@ $button-variants: (
     font-weight: $font-weight-bold,
     padding: 8px 12px,
     radius: 10px,
+    line-height: 21px,
     icon-gap: 10px,
   ),
   filter: (
@@ -36,6 +38,7 @@ $button-variants: (
     font-weight: $font-weight-regular,
     padding: 2px 10px,
     radius: 20px,
+    line-height: 21px,
     icon-gap: 10px,
   ),
   tertiary: (
@@ -46,6 +49,7 @@ $button-variants: (
     font-weight: $font-weight-bold,
     padding: 8px 12px,
     radius: 0,
+    line-height: 21px,
     icon-gap: 4px,
   ),
 );
@@ -54,7 +58,6 @@ $button-variants: (
   @include flex-center;
   border: none;
   font-family: $font-family-base;
-  line-height: $line-height-tight;
   cursor: pointer;
 
   &:disabled {
@@ -80,6 +83,7 @@ $button-variants: (
     color: map.get($variant, color);
     font-size: map.get($variant, font-size);
     font-weight: map.get($variant, font-weight);
+    line-height: map.get($variant, line-height);
 
     @include hover-enabled {
       background-color: map.get($variant, background-hover);

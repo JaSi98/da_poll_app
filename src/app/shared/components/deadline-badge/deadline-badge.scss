@@ -1,0 +1,22 @@
+@use '../../../../styles/abstracts/colors' as *;
+@use '../../../../styles/abstracts/typography' as *;
+
+$deadline-badge-padding: 3px 6px;
+$deadline-badge-corner-radius: 14px;
+$deadline-badge-line-height: 18px;
+
+.deadline-badge {
+  display: inline-block;
+  padding: $deadline-badge-padding;
+  border-top-right-radius: $deadline-badge-corner-radius;
+  background-color: $color-secondary-orange;
+  color: $color-primary-purple;
+  font-family: $font-family-secondary;
+  font-size: $font-size-s;
+  font-weight: $font-weight-medium;
+  line-height: $deadline-badge-line-height;
+
+  &--highlighted {
+    background-color: $color-primary-orange;
+  }
+}
