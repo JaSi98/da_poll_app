@@ -11,6 +11,7 @@ export class DeadlineBadge {
   readonly daysLeft = input.required<number>();
   readonly isHighlighted = input<boolean>(false);
 
+  protected readonly isEnded = computed<boolean>(() => this.daysLeft() <= 0);
   protected readonly dayUnit = computed<string>(() => this.getDayUnit());
 
   /** Returns the singular or plural day unit for the remaining days. */

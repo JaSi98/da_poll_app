@@ -1,0 +1,55 @@
+@use '../../../../styles/abstracts/colors' as *;
+@use '../../../../styles/abstracts/typography' as *;
+
+$survey-list-item-padding: 12px 20px;
+$survey-list-item-radius: 5px 50px 5px 5px;
+$survey-list-item-gap: 24px;
+$survey-list-item-header-gap: 8px;
+$survey-list-item-category-line-height: 20px;
+$survey-list-item-title-line-height: 30px;
+$survey-list-item-transition: 300ms ease-out;
+
+.survey-list-item {
+  border-radius: $survey-list-item-radius;
+  background-color: rgba($color-neutral-grey, 0.08);
+  transition: background-color $survey-list-item-transition;
+
+  &:hover {
+    background-color: rgba($color-neutral-grey, 0.16);
+  }
+
+  &__link {
+    display: flex;
+    flex-direction: column;
+    gap: $survey-list-item-gap;
+    padding: $survey-list-item-padding;
+    font-family: $font-family-secondary;
+    text-decoration: none;
+  }
+
+  &__header {
+    display: flex;
+    flex-direction: column;
+    gap: $survey-list-item-header-gap;
+  }
+
+  &__category {
+    margin: 0;
+    color: $color-secondary-orange;
+    font-size: $font-size-m;
+    font-weight: $font-weight-medium;
+    line-height: $survey-list-item-category-line-height;
+  }
+
+  &__title {
+    margin: 0;
+    color: $color-white;
+    font-size: $font-size-xl;
+    font-weight: $font-weight-bold;
+    line-height: $survey-list-item-title-line-height;
+  }
+
+  &__badge {
+    align-self: flex-end;
+  }
+}

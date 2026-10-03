@@ -1,0 +1,12 @@
+<article class="survey-list-item">
+  <a class="survey-list-item__link" [routerLink]="surveyLink()">
+    <header class="survey-list-item__header">
+      <p class="survey-list-item__category">{{ survey().category }}</p>
+      <h3 class="survey-list-item__title">{{ survey().title }}</h3>
+    </header>
+    @let remainingDays = daysLeft();
+    @if (remainingDays !== null) {
+      <app-deadline-badge class="survey-list-item__badge" [daysLeft]="remainingDays" />
+    }
+  </a>
+</article>

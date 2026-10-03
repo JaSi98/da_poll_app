@@ -1,3 +1,7 @@
 <span class="deadline-badge" [class.deadline-badge--highlighted]="isHighlighted()">
-  Ends in {{ daysLeft() }} {{ dayUnit() }}
+  @if (isEnded()) {
+    Ended
+  } @else {
+    Ends in {{ daysLeft() }} {{ dayUnit() }}
+  }
 </span>
