@@ -1,5 +1,6 @@
 @use '../../../../styles/abstracts/colors' as *;
 @use '../../../../styles/abstracts/typography' as *;
+@use '../../../../styles/abstracts/mixins' as *;
 
 $dropdown-radius: 6px;
 $dropdown-trigger-padding: 4px 6px 4px 10px;
@@ -13,6 +14,7 @@ $dropdown-option-padding: 4px;
 $dropdown-option-line-height: 18px;
 $dropdown-option-letter-spacing: 0.02em;
 $dropdown-menu-layer: 1;
+$dropdown-menu-hidden-offset: -4px;
 $dropdown-selection-padding: 0 10px;
 
 :host {
@@ -52,6 +54,7 @@ $dropdown-selection-padding: 0 10px;
   &__arrow {
     width: $dropdown-icon-size;
     height: $dropdown-icon-size;
+    transition: transform $motion-duration $motion-easing;
   }
 
   &__menu {
@@ -70,6 +73,11 @@ $dropdown-selection-padding: 0 10px;
     border-radius: $dropdown-radius;
     background-color: $color-white;
     list-style: none;
+    @include reveal-hidden(translateY($dropdown-menu-hidden-offset));
+
+    &--open {
+      @include reveal-visible;
+    }
   }
 
   &__option {

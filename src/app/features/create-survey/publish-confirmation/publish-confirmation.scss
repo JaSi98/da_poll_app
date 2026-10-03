@@ -1,5 +1,6 @@
 @use '../../../../styles/abstracts/colors' as *;
 @use '../../../../styles/abstracts/typography' as *;
+@use '../../../../styles/abstracts/mixins' as *;
 
 $confirmation-offset: 24px;
 $confirmation-width: 357px;
@@ -11,7 +12,7 @@ $confirmation-line-height: 29px;
 $confirmation-letter-spacing: 0.02em;
 $confirmation-close-offset: 5px;
 $confirmation-icon-size: 24px;
-$confirmation-slide-in: 300ms ease-out;
+$confirmation-motion-duration: 300ms;
 $confirmation-layer: 10;
 
 :host {
@@ -32,7 +33,18 @@ $confirmation-layer: 10;
   border-radius: $confirmation-radius;
   background-color: $color-light-orange;
   color: $color-primary-purple;
-  animation: slide-in-from-right $confirmation-slide-in;
+  @include reveal-hidden(
+    translateX(calc(100% + #{$confirmation-offset})),
+    $confirmation-motion-duration
+  );
+
+  &--visible {
+    @include reveal-visible($confirmation-motion-duration);
+  }
+
+  &__announcement {
+    @include visually-hidden;
+  }
 
   &__text {
     width: $confirmation-text-width;
@@ -57,21 +69,5 @@ $confirmation-layer: 10;
   &__icon {
     width: $confirmation-icon-size;
     height: $confirmation-icon-size;
-  }
-}
-
-@keyframes slide-in-from-right {
-  from {
-    transform: translateX(calc(100% + #{$confirmation-offset}));
-  }
-
-  to {
-    transform: translateX(0);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .publish-confirmation {
-    animation: none;
   }
 }

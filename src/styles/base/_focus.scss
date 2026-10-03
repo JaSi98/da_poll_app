@@ -1,0 +1,11 @@
+@use '../abstracts/colors' as *;
+@use '../abstracts/mixins' as *;
+
+:root {
+  @include focus-ring-on-light;
+}
+
+// Keyboard users see where they are; mouse clicks do not trigger :focus-visible on buttons.
+:focus-visible {
+  @include focus-ring;
+}

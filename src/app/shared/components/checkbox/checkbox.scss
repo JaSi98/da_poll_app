@@ -74,3 +74,7 @@ $checkbox-check-height: 8px;
 .checkbox--on-dark .checkbox__input:not(:checked) + .checkbox__box {
   border-color: $color-white;
 }
+
+.checkbox__input:focus-visible + .checkbox__box {
+  @include focus-ring;
+}

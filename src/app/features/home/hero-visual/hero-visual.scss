@@ -8,6 +8,8 @@ $hero-visual-phone-size: 420px;
 $hero-visual-easing: ease-in-out;
 
 // Boxes are (left, top, width, height) inside the visual, at rest and while hovering.
+// Float describes the gentle idle movement: the end point of a straight back-and-forth line
+// and the time for one direction.
 $hero-visual-elements: (
   bubble: (
     rest: (
@@ -23,6 +25,11 @@ $hero-visual-elements: (
       115px,
     ),
     duration: 250ms,
+    float: (
+      x: 0,
+      y: -8px,
+      duration: 3s,
+    ),
   ),
   check: (
     rest: (
@@ -38,6 +45,11 @@ $hero-visual-elements: (
       95px,
     ),
     duration: 350ms,
+    float: (
+      x: 4px,
+      y: -6px,
+      duration: 4s,
+    ),
   ),
 );
 
@@ -78,8 +90,25 @@ $hero-visual-elements: (
 @each $name, $element in $hero-visual-elements {
   $rest: map.get($element, rest);
   $hover: map.get($element, hover);
+  $float: map.get($element, float);
+
+  // translate is separate from transform, so floating and the hover movement add up.
+  @keyframes hero-visual-float-#{$name} {
+    from {
+      translate: 0 0;
+    }
+
+    to {
+      translate: map.get($float, x) map.get($float, y);
+    }
+  }
 
   .hero-visual__#{$name} {
+    animation: hero-visual-float-#{$name}
+      map.get($float, duration)
+      $hero-visual-easing
+      infinite
+      alternate;
     transition:
       transform map.get($element, duration) $hero-visual-easing,
       opacity map.get($element, duration) $hero-visual-easing;

@@ -1,4 +1,4 @@
-import { Component, effect, inject, model } from '@angular/core';
+import { Component, computed, effect, inject, model } from '@angular/core';
 import { Router } from '@angular/router';
 
 const AUTO_HIDE_DELAY_MS = 5000;
@@ -8,12 +8,13 @@ const SURVEY_ROUTE = '/surveys';
   selector: 'app-publish-confirmation',
   styleUrl: './publish-confirmation.scss',
   templateUrl: './publish-confirmation.html',
-  host: { role: 'status' },
 })
 export class PublishConfirmation {
   private readonly router = inject(Router);
 
   readonly surveyId = model<number | null>(null);
+
+  protected readonly isVisible = computed<boolean>(() => this.surveyId() !== null);
 
   constructor() {
     effect((onCleanup) => {

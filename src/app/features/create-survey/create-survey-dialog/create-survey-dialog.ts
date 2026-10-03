@@ -80,10 +80,9 @@ export class CreateSurveyDialog {
     this.isOpen.set(false);
   }
 
-  /** Runs after every way of closing (Cancel, Esc, publish) and starts the next survey fresh. */
+  /** Runs after every way of closing (Cancel, Esc, publish) and keeps isOpen in sync. */
   protected handleClose(): void {
     this.isOpen.set(false);
-    this.resetForm();
   }
 
   /** Validates the form and saves the survey if every required field is filled. */
@@ -111,10 +110,11 @@ export class CreateSurveyDialog {
     }
   }
 
-  /** Opens the native dialog as a modal or closes it, depending on isOpen. */
+  /** Opens the dialog with an empty form, or closes it; resetting on open keeps the closing animation calm. */
   private syncDialog(isOpen: boolean): void {
     const dialog = this.dialogElement().nativeElement;
     if (isOpen && !dialog.open) {
+      this.resetForm();
       dialog.showModal();
     }
     if (!isOpen && dialog.open) {

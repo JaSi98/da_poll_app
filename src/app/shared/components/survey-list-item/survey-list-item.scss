@@ -1,5 +1,6 @@
 @use '../../../../styles/abstracts/colors' as *;
 @use '../../../../styles/abstracts/typography' as *;
+@use '../../../../styles/abstracts/mixins' as *;
 
 $survey-list-item-padding: 12px 20px;
 $survey-list-item-radius: 5px 50px 5px 5px;
@@ -52,4 +53,13 @@ $survey-list-item-transition: 300ms ease-out;
   &__badge {
     align-self: flex-end;
   }
+}
+
+// The link fills the card, so the ring is drawn around the whole card.
+.survey-list-item:has(.survey-list-item__link:focus-visible) {
+  @include focus-ring;
+}
+
+.survey-list-item__link:focus-visible {
+  outline: none;
 }

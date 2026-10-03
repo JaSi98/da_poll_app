@@ -17,23 +17,27 @@
     <use href="assets/icons/arrow-drop-down.svg#icon"></use>
   </svg>
 </button>
-@if (isOpen()) {
-  <ul class="dropdown__menu" role="listbox" [id]="listboxId" [attr.aria-label]="label()">
-    @for (option of options(); track option.value) {
-      <li
-        class="dropdown__option"
-        [class.dropdown__option--active]="$index === activeIndex()"
-        role="option"
-        [id]="getOptionId($index)"
-        [attr.aria-selected]="option.value === selectedValue()"
-        (click)="selectOption(option)"
-        (mouseenter)="setActiveIndex($index)"
-      >
-        {{ option.label }}
-      </li>
-    }
-  </ul>
-}
+<ul
+  class="dropdown__menu"
+  [class.dropdown__menu--open]="isOpen()"
+  role="listbox"
+  [id]="listboxId"
+  [attr.aria-label]="label()"
+>
+  @for (option of options(); track option.value) {
+    <li
+      class="dropdown__option"
+      [class.dropdown__option--active]="$index === activeIndex()"
+      role="option"
+      [id]="getOptionId($index)"
+      [attr.aria-selected]="option.value === selectedValue()"
+      (click)="selectOption(option)"
+      (mouseenter)="setActiveIndex($index)"
+    >
+      {{ option.label }}
+    </li>
+  }
+</ul>
 @if (selectedLabel(); as selectedOptionLabel) {
   <p class="dropdown__selection">{{ selectedOptionLabel }}</p>
 }

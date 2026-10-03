@@ -1,5 +1,6 @@
 @use '../../../../styles/abstracts/colors' as *;
 @use '../../../../styles/abstracts/typography' as *;
+@use '../../../../styles/abstracts/mixins' as *;
 
 $highlights-card-height: 310px;
 $highlights-card-padding: 40px 44px;
@@ -52,4 +53,13 @@ $highlights-card-transition: 100ms ease-out;
     font-weight: $font-weight-bold;
     line-height: $highlights-card-title-line-height;
   }
+}
+
+// The link fills the card, so the ring is drawn around the whole card.
+.highlights-card:has(.highlights-card__link:focus-visible) {
+  @include focus-ring;
+}
+
+.highlights-card__link:focus-visible {
+  outline: none;
 }

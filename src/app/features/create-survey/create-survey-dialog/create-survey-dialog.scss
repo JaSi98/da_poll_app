@@ -26,6 +26,9 @@ $field-label-height: 26px;
 $clear-button-size: 26px;
 $questions-column-gap: 64px;
 $questions-row-gap: 48px;
+$dialog-motion-duration: 250ms;
+$dialog-hidden-transform: translateY(24px) scale(0.98);
+$dialog-backdrop-color: rgba(0, 0, 0, 0.1);
 
 .create-survey-dialog {
   box-sizing: border-box;
@@ -39,6 +42,32 @@ $questions-row-gap: 48px;
   background-color: $color-primary-purple;
   color: $color-text-light;
   font-family: $font-family-secondary;
+  @include focus-ring-on-dark;
+  opacity: 0;
+  transform: $dialog-hidden-transform;
+  // allow-discrete keeps the dialog in the top layer until the closing transition has finished.
+  transition:
+    opacity $dialog-motion-duration $motion-easing,
+    transform $dialog-motion-duration $motion-easing,
+    overlay $dialog-motion-duration allow-discrete,
+    display $dialog-motion-duration allow-discrete;
+
+  &[open] {
+    opacity: 1;
+    transform: none;
+  }
+
+  &::backdrop {
+    background-color: transparent;
+    transition:
+      background-color $dialog-motion-duration $motion-easing,
+      overlay $dialog-motion-duration allow-discrete,
+      display $dialog-motion-duration allow-discrete;
+  }
+
+  &[open]::backdrop {
+    background-color: $dialog-backdrop-color;
+  }
 
   // Only the panel scrolls; header and footer stay visible on small screens.
   &__form {
@@ -155,5 +184,17 @@ $questions-row-gap: 48px;
 
   &__error {
     @include form-error-text;
+  }
+}
+
+// Start values for the opening transition, because a dialog has no previous style to animate from.
+@starting-style {
+  .create-survey-dialog[open] {
+    opacity: 0;
+    transform: $dialog-hidden-transform;
+  }
+
+  .create-survey-dialog[open]::backdrop {
+    background-color: transparent;
   }
 }

@@ -74,3 +74,56 @@ $scrollbar-shadow: 3px 3px 3.2px rgba(0, 0, 0, 0.25);
     scrollbar-color: $color-primary-orange transparent;
   }
 }
+
+$focus-ring-width: 2px;
+$focus-ring-offset: 2px;
+
+// Sets the focus ring colour for light areas; purple keeps a contrast of at least 3:1.
+@mixin focus-ring-on-light {
+  --focus-ring-color: #{$color-primary-purple};
+}
+
+// Sets the focus ring colour for dark areas, where purple would not be visible.
+@mixin focus-ring-on-dark {
+  --focus-ring-color: #{$color-primary-orange};
+}
+
+@mixin focus-ring {
+  outline: $focus-ring-width solid var(--focus-ring-color);
+  outline-offset: $focus-ring-offset;
+}
+
+// Scroll containers clip outlines; this adds room for the focus ring without moving the content.
+$focus-ring-room: $focus-ring-width + $focus-ring-offset;
+
+@mixin focus-ring-room($extra-right: 0px) {
+  $room: $focus-ring-room;
+  margin: (-$room) (-$room - $extra-right) (-$room) (-$room);
+  padding: $room ($room + $extra-right) $room $room;
+}
+
+$motion-duration: 200ms;
+$motion-easing: ease-out;
+
+// Hidden state of an element that fades and slides in and out. It stays in the DOM so it can
+// animate out, but visibility keeps it away from mouse, keyboard and screen readers.
+@mixin reveal-hidden($hidden-transform, $duration: $motion-duration) {
+  opacity: 0;
+  transform: $hidden-transform;
+  visibility: hidden;
+  transition:
+    opacity $duration $motion-easing,
+    transform $duration $motion-easing,
+    visibility 0s linear $duration;
+}
+
+// Visible state; visibility switches at once so the element can animate in.
+@mixin reveal-visible($duration: $motion-duration) {
+  opacity: 1;
+  transform: none;
+  visibility: visible;
+  transition:
+    opacity $duration $motion-easing,
+    transform $duration $motion-easing,
+    visibility 0s;
+}

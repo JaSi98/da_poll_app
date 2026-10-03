@@ -54,11 +54,16 @@ export class Dropdown {
       return;
     }
     const action = this.keyActions[event.key];
-    if (!action) {
+    if (!action || this.isEscapeForParent(event.key)) {
       return;
     }
     event.preventDefault();
     action();
+  }
+
+  /** Returns whether Escape should reach a surrounding dialog because the menu is already closed. */
+  private isEscapeForParent(key: string): boolean {
+    return key === 'Escape' && !this.isOpen();
   }
 
   /** Stores the selected option and closes the menu. */
