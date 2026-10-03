@@ -19,7 +19,7 @@
         <app-answer
           [answer]="answer"
           [index]="$index"
-          [groupName]="question().id"
+          [groupName]="'question-' + question().id"
           [isMultipleChoice]="question().isMultipleChoice"
           [isDisabled]="isDisabled()"
           [checked]="isAnswerSelected(answer.id)"

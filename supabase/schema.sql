@@ -92,3 +92,27 @@ end;
 $$;
 
 grant execute on function public.create_survey(text, text, date, bigint, jsonb) to anon;
+
+-- Counts one vote for each given answer. Runs with owner rights so visitors never need
+-- update access to the answers table; answers of ended surveys are ignored.
+create or replace function public.submit_votes(answer_ids bigint[])
+returns void
+language sql
+security definer
+set search_path = public
+as $$
+  update public.answers
+  set votes = votes + 1
+  where id = any (answer_ids)
+    and question_id in (
+      select questions.id
+      from public.questions
+      join public.surveys on surveys.id = questions.survey_id
+      where surveys.end_date is null or surveys.end_date >= current_date
+    );
+$$;
+
+grant execute on function public.submit_votes(bigint[]) to anon;
+
+-- Sends every change of the answers table to subscribed browsers for the live results.
+alter publication supabase_realtime add table public.answers;

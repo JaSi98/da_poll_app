@@ -1,7 +1,7 @@
 <article class="highlights-card" (mouseenter)="setHovered(true)" (mouseleave)="setHovered(false)">
   <a class="highlights-card__link" [routerLink]="surveyLink()">
     <header class="highlights-card__header">
-      <p class="highlights-card__category">{{ survey().category }}</p>
+      <p class="highlights-card__category">{{ survey().categoryName }}</p>
       <h3 class="highlights-card__title">{{ survey().title }}</h3>
     </header>
     @let remainingDays = daysLeft();

@@ -1,5 +1,5 @@
 export interface Answer {
-  id: string;
+  id: number;
   text: string;
   votes: number;
 }

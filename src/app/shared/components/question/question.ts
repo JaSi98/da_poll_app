@@ -14,17 +14,17 @@ export class QuestionComponent {
   readonly question = input.required<Question>();
   readonly index = input.required<number>();
   readonly isDisabled = input<boolean>(false);
-  readonly selectedAnswerIds = model<string[]>([]);
+  readonly selectedAnswerIds = model<number[]>([]);
 
   protected readonly questionNumber = computed<number>(() => this.index() + 1);
 
   /** Returns whether the answer with the given id is currently selected. */
-  protected isAnswerSelected(answerId: string): boolean {
+  protected isAnswerSelected(answerId: number): boolean {
     return this.selectedAnswerIds().includes(answerId);
   }
 
   /** Updates the selection after an answer was checked or unchecked. */
-  protected updateSelection(answerId: string, isChecked: boolean): void {
+  protected updateSelection(answerId: number, isChecked: boolean): void {
     if (this.question().isMultipleChoice) {
       this.toggleAnswer(answerId, isChecked);
       return;
@@ -35,7 +35,7 @@ export class QuestionComponent {
   }
 
   /** Adds or removes an answer in a multiple choice selection. */
-  private toggleAnswer(answerId: string, isChecked: boolean): void {
+  private toggleAnswer(answerId: number, isChecked: boolean): void {
     const otherAnswerIds = this.selectedAnswerIds().filter((id) => id !== answerId);
     this.selectedAnswerIds.set(isChecked ? [...otherAnswerIds, answerId] : otherAnswerIds);
   }

@@ -10,6 +10,7 @@ const SURVEY_ROUTE = '/surveys';
 @Component({
   selector: 'app-highlights-card',
   imports: [RouterLink, DeadlineBadge],
+  styleUrl: './highlights-card.scss',
   templateUrl: './highlights-card.html',
 })
 export class HighlightsCard {

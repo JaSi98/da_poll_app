@@ -1,7 +1,7 @@
 import { Answer } from './answer';
 
 export interface Question {
-  id: string;
+  id: number;
   text: string;
   isMultipleChoice: boolean;
   answers: Answer[];

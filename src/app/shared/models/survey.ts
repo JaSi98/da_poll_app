@@ -1,7 +1,14 @@
+import { Question } from './question';
+
 export interface Survey {
-  id: string;
+  id: number;
   title: string;
-  category: string;
   description: string | null;
   endDate: Date | null;
+  categoryId: number;
+  categoryName: string;
+}
+
+export interface SurveyDetail extends Survey {
+  questions: Question[];
 }
