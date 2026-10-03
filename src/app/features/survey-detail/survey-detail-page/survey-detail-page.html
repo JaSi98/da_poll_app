@@ -1,2 +1,72 @@
 <app-site-header variant="light" />
-<main class="survey-detail-page"></main>
+<main class="survey-detail-page">
+  @if (survey(); as survey) {
+    <div class="survey-detail-page__content">
+      <article class="survey-detail-page__survey" aria-labelledby="survey-detail-title">
+        <app-status-badge status="published" />
+        <div class="survey-detail-page__body">
+          <div class="survey-detail-page__meta">
+            @if (survey.endDate) {
+              <p>Ends on {{ survey.endDate | date: 'dd.MM.yyyy' }}</p>
+            }
+            <p class="survey-detail-page__category">Category: {{ survey.categoryName }}</p>
+          </div>
+          <h1 id="survey-detail-title" class="survey-detail-page__title">{{ survey.title }}</h1>
+          @if (survey.description) {
+            <p class="survey-detail-page__description">{{ survey.description }}</p>
+          }
+
+          <div class="survey-detail-page__questions">
+            @for (question of survey.questions; track question.id; let questionIndex = $index) {
+              <app-question
+                [question]="question"
+                [index]="questionIndex"
+                [isDisabled]="isVotingLocked()"
+                [selectedAnswerIds]="getSelectedAnswerIds(question.id)"
+                (selectedAnswerIdsChange)="updateSelection(question.id, $event)"
+              />
+            }
+          </div>
+
+          <footer class="survey-detail-page__footer">
+            @if (hasMissingAnswers()) {
+              <p class="survey-detail-page__error" role="alert">Please answer every question.</p>
+            }
+            @if (hasSubmitError()) {
+              <p class="survey-detail-page__error" role="alert">
+                Your vote could not be saved. Please try again.
+              </p>
+            }
+            <app-button
+              variant="secondary"
+              [isOnLight]="true"
+              [label]="submitLabel()"
+              [isDisabled]="isVotingLocked()"
+              (buttonClick)="completeSurvey()"
+            />
+          </footer>
+        </div>
+      </article>
+
+      <section class="survey-detail-page__results" aria-labelledby="survey-results-title">
+        <h2 id="survey-results-title" class="survey-detail-page__results-title">
+          Survey results <span class="survey-detail-page__live">LIVE</span>
+        </h2>
+        @if (hasResults()) {
+          @for (question of survey.questions; track question.id; let questionIndex = $index) {
+            <app-question-results [question]="question" [index]="questionIndex" />
+          }
+        } @else {
+          <p class="survey-detail-page__results-hint">
+            Results will be shown here after participants complete the survey.
+          </p>
+          <p class="survey-detail-page__no-results">There are no answers yet.</p>
+        }
+      </section>
+    </div>
+  } @else if (hasLoadError()) {
+    <p class="survey-detail-page__error" role="alert">
+      This survey could not be loaded. Please check the link or try again later.
+    </p>
+  }
+</main>

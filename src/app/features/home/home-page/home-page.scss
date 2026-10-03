@@ -13,14 +13,12 @@ $title-size: 100px;
 $title-line-height: 89px;
 $lead-width: 666px;
 $lead-line-height: 30px;
-$surveys-width: 1042px;
 $section-title-size: 72px;
 $section-title-line-height: 82px;
 $section-title-gap: 80px;
 $subtitle-size: 32px;
 $subtitle-line-height: 42px;
 $subtitle-gap: 32px;
-$highlights-card-width: 321px;
 $highlights-card-height: 310px;
 $highlights-gap: 32px;
 $tabs-gap: 24px;
@@ -84,8 +82,6 @@ $hint-line-height: 20px;
   &__surveys {
     display: flex;
     flex-direction: column;
-    width: min(#{$surveys-width}, 100%);
-    margin-inline: auto;
   }
 
   &__section-title {
@@ -116,8 +112,7 @@ $hint-line-height: 20px;
   &__highlights {
     @include custom-scrollbar;
     display: grid;
-    grid-template-columns: repeat(3, $highlights-card-width);
-    justify-content: space-between;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: $highlights-gap;
     max-height: $highlights-card-height;
     margin: 0;

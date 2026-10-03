@@ -1,11 +1,9 @@
 @use '../../../../styles/abstracts/colors' as *;
 @use '../../../../styles/abstracts/typography' as *;
 
-$highlights-card-width: 321px;
 $highlights-card-height: 310px;
-$highlights-card-padding: 40px 18px;
+$highlights-card-padding: 40px 44px;
 $highlights-card-corner-radius: 80px;
-$highlights-card-content-width: 233px;
 $highlights-card-header-gap: 8px;
 $highlights-card-category-line-height: 18px;
 $highlights-card-title-line-height: 33px;
@@ -13,7 +11,7 @@ $highlights-card-transition: 100ms ease-out;
 
 .highlights-card {
   box-sizing: border-box;
-  width: $highlights-card-width;
+  width: 100%;
   height: $highlights-card-height;
   padding: $highlights-card-padding;
   border-top-right-radius: $highlights-card-corner-radius;
@@ -29,9 +27,7 @@ $highlights-card-transition: 100ms ease-out;
     flex-direction: column;
     justify-content: space-between;
     align-items: flex-start;
-    width: $highlights-card-content-width;
     height: 100%;
-    margin-inline: auto;
     color: $color-primary-purple;
     font-family: $font-family-secondary;
     text-decoration: none;

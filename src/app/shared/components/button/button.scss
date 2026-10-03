@@ -126,3 +126,8 @@ $button-variants: (
 .button--tertiary .button__content {
   border-bottom: 1px solid currentColor;
 }
+
+// Light text would disappear on light backgrounds, so the secondary button switches to dark text there.
+.button--secondary.button--on-light {
+  color: $color-text-dark;
+}
