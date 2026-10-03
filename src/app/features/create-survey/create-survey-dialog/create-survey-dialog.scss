@@ -4,13 +4,17 @@
 
 $dialog-width: 1166px;
 $dialog-viewport-gutter: 32px;
-$dialog-padding: 40px 54px;
-$dialog-radius: 5px 100px 5px 5px;
+$dialog-vertical-padding: 40px;
+$dialog-horizontal-padding: 54px;
+$dialog-corner-radius: 100px;
+$dialog-small-radius: 5px;
+$dialog-radius: $dialog-small-radius $dialog-corner-radius $dialog-small-radius $dialog-small-radius;
 $dialog-section-gap: 32px;
 $dialog-footer-offset: 16px;
 $dialog-title-line-height: 61px;
 $panel-padding: 40px 32px;
-$panel-radius: 5px 80px 5px 5px;
+$panel-corner-radius: 80px;
+$panel-radius: $dialog-small-radius $panel-corner-radius $dialog-small-radius $dialog-small-radius;
 $panel-gap: 64px;
 $details-column-width: 470px;
 $details-row-gap: 8px;
@@ -27,20 +31,25 @@ $questions-row-gap: 48px;
   box-sizing: border-box;
   width: $dialog-width;
   max-width: calc(100vw - #{$dialog-viewport-gutter});
-  padding: $dialog-padding;
+  max-height: calc(100dvh - #{$dialog-viewport-gutter});
+  padding: $dialog-vertical-padding $dialog-horizontal-padding;
+  overflow: hidden;
   border: none;
   border-radius: $dialog-radius;
   background-color: $color-primary-purple;
   color: $color-text-light;
   font-family: $font-family-secondary;
 
+  // Only the panel scrolls; header and footer stay visible on small screens.
   &__form {
     display: flex;
     flex-direction: column;
     gap: $dialog-section-gap;
+    max-height: calc(100dvh - #{$dialog-viewport-gutter} - #{$dialog-vertical-padding * 2});
   }
 
   &__header {
+    flex-shrink: 0;
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
@@ -63,9 +72,13 @@ $questions-row-gap: 48px;
   }
 
   &__panel {
+    @include custom-scrollbar($panel-corner-radius, $dialog-small-radius);
     display: flex;
     flex-direction: column;
+    flex: 1 1 auto;
     gap: $panel-gap;
+    min-height: 0;
+    overflow-y: auto;
     padding: $panel-padding;
     border-radius: $panel-radius;
     background-color: rgba($color-muted-purple, 0.16);
@@ -132,6 +145,7 @@ $questions-row-gap: 48px;
   }
 
   &__footer {
+    flex-shrink: 0;
     display: flex;
     justify-content: flex-end;
     align-items: center;

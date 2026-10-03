@@ -1,0 +1,162 @@
+@use '../../../../styles/abstracts/colors' as *;
+@use '../../../../styles/abstracts/typography' as *;
+@use '../../../../styles/abstracts/mixins' as *;
+
+$home-content-top: 88px;
+$home-content-bottom: 90px;
+$home-section-gap: 90px;
+$hero-gap: 32px;
+$intro-width: 712px;
+$intro-gap: 24px;
+$intro-button-offset: 16px;
+$title-size: 100px;
+$title-line-height: 89px;
+$lead-width: 666px;
+$lead-line-height: 30px;
+$surveys-width: 1042px;
+$section-title-size: 72px;
+$section-title-line-height: 82px;
+$section-title-gap: 80px;
+$subtitle-size: 32px;
+$subtitle-line-height: 42px;
+$subtitle-gap: 32px;
+$highlights-card-width: 321px;
+$highlights-card-height: 310px;
+$highlights-gap: 32px;
+$tabs-gap: 24px;
+$list-offset: 40px;
+$list-gap: 16px;
+$list-visible-height: 413px;
+$scrollbar-offset: 15px;
+$hint-line-height: 20px;
+
+:host {
+  display: block;
+  min-height: 100vh;
+  background-color: $color-primary-purple;
+}
+
+.home-page {
+  @include page-container;
+  display: flex;
+  flex-direction: column;
+  gap: $home-section-gap;
+  padding-top: $home-content-top;
+  padding-bottom: $home-content-bottom;
+
+  &__hero {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: $hero-gap;
+  }
+
+  &__intro {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: $intro-gap;
+    max-width: $intro-width;
+  }
+
+  &__title {
+    margin: 0;
+    color: $color-primary-orange;
+    font-family: $font-family-display;
+    font-size: $title-size;
+    font-weight: $font-weight-regular;
+    line-height: $title-line-height;
+  }
+
+  &__lead {
+    max-width: $lead-width;
+    margin: 0;
+    color: $color-white;
+    font-size: $font-size-xl;
+    font-weight: $font-weight-semibold;
+    line-height: $lead-line-height;
+  }
+
+  &__new-survey {
+    margin-top: $intro-button-offset;
+  }
+
+  &__surveys {
+    display: flex;
+    flex-direction: column;
+    width: min(#{$surveys-width}, 100%);
+    margin-inline: auto;
+  }
+
+  &__section-title {
+    margin: 0 0 $section-title-gap;
+    color: $color-primary-orange;
+    font-family: $font-family-display;
+    font-size: $section-title-size;
+    font-weight: $font-weight-regular;
+    line-height: $section-title-line-height;
+    text-align: center;
+  }
+
+  &__ending-soon {
+    display: flex;
+    flex-direction: column;
+    gap: $subtitle-gap;
+    margin-bottom: $home-section-gap;
+  }
+
+  &__subtitle {
+    margin: 0;
+    color: $color-white;
+    font-size: $subtitle-size;
+    font-weight: $font-weight-medium;
+    line-height: $subtitle-line-height;
+  }
+
+  &__highlights {
+    @include custom-scrollbar;
+    display: grid;
+    grid-template-columns: repeat(3, $highlights-card-width);
+    justify-content: space-between;
+    gap: $highlights-gap;
+    max-height: $highlights-card-height;
+    margin: 0;
+    padding: 0;
+    overflow-y: auto;
+    list-style: none;
+  }
+
+  &__list-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__tabs {
+    display: flex;
+    gap: $tabs-gap;
+  }
+
+  &__survey-list {
+    @include custom-scrollbar;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: $list-gap;
+    max-height: $list-visible-height;
+    margin: $list-offset (-$scrollbar-offset) 0 0;
+    padding: 0 $scrollbar-offset 0 0;
+    overflow-y: auto;
+    list-style: none;
+  }
+
+  &__hint {
+    margin: $list-offset 0 0;
+    color: $color-white;
+    font-size: $font-size-m;
+    line-height: $hint-line-height;
+  }
+}
+
+.home-page__ending-soon .home-page__hint {
+  margin-top: 0;
+}

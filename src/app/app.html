@@ -1,0 +1,6 @@
+<router-outlet />
+<app-create-survey-dialog
+  [(isOpen)]="launcher.isDialogOpen"
+  (published)="launcher.handlePublished($event)"
+/>
+<app-publish-confirmation [(surveyId)]="launcher.publishedSurveyId" />

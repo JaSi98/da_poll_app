@@ -2,7 +2,7 @@
   <a class="highlights-card__link" [routerLink]="surveyLink()">
     <header class="highlights-card__header">
       <p class="highlights-card__category">{{ survey().categoryName }}</p>
-      <h3 class="highlights-card__title">{{ survey().title }}</h3>
+      <h4 class="highlights-card__title">{{ survey().title }}</h4>
     </header>
     @let remainingDays = daysLeft();
     @if (remainingDays !== null) {

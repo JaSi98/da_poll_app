@@ -24,6 +24,7 @@ $text-field-line-height: 20px;
     font-size: $font-size-l;
     font-weight: $font-weight-bold;
     line-height: $text-field-label-line-height;
+    white-space: nowrap;
   }
 
   &__optional {

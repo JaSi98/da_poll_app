@@ -1,0 +1,11 @@
+@use '../../../../styles/abstracts/mixins' as *;
+
+$site-header-top-offset: 39px;
+
+.site-header {
+  @include page-container;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: $site-header-top-offset;
+}

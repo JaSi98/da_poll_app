@@ -1,0 +1,71 @@
+<app-site-header variant="dark" />
+<main class="home-page">
+  <section class="home-page__hero" aria-labelledby="home-page-title">
+    <div class="home-page__intro">
+      <h1 id="home-page-title" class="home-page__title">Collect Feedback, Unlock Ideas</h1>
+      <p class="home-page__lead">
+        Create and share surveys in minutes – from team events to workplace culture. Collect
+        opinions, engage your audience, and turn feedback into action.
+      </p>
+      <app-button
+        class="home-page__new-survey"
+        label="New survey"
+        icon="add"
+        (buttonClick)="openCreateDialog()"
+      />
+    </div>
+    <app-hero-visual />
+  </section>
+
+  <section class="home-page__surveys" aria-labelledby="home-page-surveys-title">
+    <h2 id="home-page-surveys-title" class="home-page__section-title">Your surveys</h2>
+
+    <section class="home-page__ending-soon" aria-labelledby="home-page-ending-soon-title">
+      <h3 id="home-page-ending-soon-title" class="home-page__subtitle">Ending soon surveys</h3>
+      @if (endingSoonSurveys().length > 0) {
+        <ul class="home-page__highlights">
+          @for (survey of endingSoonSurveys(); track survey.id) {
+            <li><app-highlights-card [survey]="survey" /></li>
+          }
+        </ul>
+      } @else if (!isLoading()) {
+        <p class="home-page__hint">No surveys are ending in the next {{ endingSoonDays }} days.</p>
+      }
+    </section>
+
+    <div class="home-page__list-controls">
+      <div class="home-page__tabs" role="group" aria-label="Survey status">
+        <app-button
+          variant="filter"
+          label="Active survey"
+          [isActive]="activeTab() === 'active'"
+          (buttonClick)="selectTab('active')"
+        />
+        <app-button
+          variant="filter"
+          label="Past survey"
+          [isActive]="activeTab() === 'past'"
+          (buttonClick)="selectTab('past')"
+        />
+      </div>
+      <app-category-filter
+        [selectedCategoryId]="selectedCategoryId()"
+        (selectedCategoryIdChange)="selectCategory($event)"
+      />
+    </div>
+
+    @if (hasLoadError()) {
+      <p class="home-page__hint" role="alert">
+        The surveys could not be loaded. Please try again later.
+      </p>
+    } @else if (visibleSurveys().length > 0) {
+      <ul class="home-page__survey-list">
+        @for (survey of visibleSurveys(); track survey.id) {
+          <li><app-survey-list-item [survey]="survey" /></li>
+        }
+      </ul>
+    } @else if (!isLoading()) {
+      <p class="home-page__hint">There are no surveys in this category yet.</p>
+    }
+  </section>
+</main>

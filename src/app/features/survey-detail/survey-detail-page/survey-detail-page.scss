@@ -1,0 +1,12 @@
+@use '../../../../styles/abstracts/colors' as *;
+@use '../../../../styles/abstracts/mixins' as *;
+
+:host {
+  display: block;
+  min-height: 100vh;
+  background-color: $color-text-light;
+}
+
+.survey-detail-page {
+  @include page-container;
+}
