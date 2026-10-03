@@ -1,0 +1,49 @@
+@use '../../../../styles/abstracts/colors' as *;
+@use '../../../../styles/abstracts/typography' as *;
+
+$result-bar-gap: 6px;
+$result-bar-letter-width: 15px;
+$result-bar-value-width: 31px;
+$result-bar-height: 14px;
+$result-bar-end-radius: 20px;
+$result-bar-transition: 300ms ease-out;
+
+.result-bar {
+  display: flex;
+  align-items: center;
+  gap: $result-bar-gap;
+  margin: 0;
+  font-family: $font-family-secondary;
+  font-size: $font-size-s;
+
+  &__letter {
+    flex-shrink: 0;
+    width: $result-bar-letter-width;
+    color: $color-primary-purple;
+    font-weight: $font-weight-bold;
+  }
+
+  &__track {
+    flex-grow: 1;
+    height: $result-bar-height;
+    border-radius: 0 $result-bar-end-radius $result-bar-end-radius 0;
+    background-color: $color-light-grey;
+    overflow: hidden;
+  }
+
+  &__fill {
+    display: block;
+    height: 100%;
+    border-radius: 0 $result-bar-end-radius $result-bar-end-radius 0;
+    background-color: $color-primary-orange;
+    transition: width $result-bar-transition;
+  }
+
+  &__value {
+    flex-shrink: 0;
+    width: $result-bar-value-width;
+    color: $color-dark-orange;
+    font-weight: $font-weight-extrabold;
+    text-align: right;
+  }
+}

@@ -1,0 +1,7 @@
+<p class="result-bar">
+  <span class="result-bar__letter">{{ optionLetter() }}</span>
+  <span class="result-bar__track" aria-hidden="true">
+    <span class="result-bar__fill" [style.width.%]="percentage()"></span>
+  </span>
+  <span class="result-bar__value">{{ percentage() }}%</span>
+</p>
