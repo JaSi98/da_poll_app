@@ -15,6 +15,7 @@ export class Checkbox {
   readonly isDisabled = input<boolean>(false);
   readonly hasHoverEffect = input<boolean>(true);
   readonly alignment = input<CheckboxAlignment>('center');
+  readonly isOnDark = input<boolean>(false);
   readonly ariaLabel = input<string | null>(null);
 
   /** Syncs the checked state with the native input after a user change. */

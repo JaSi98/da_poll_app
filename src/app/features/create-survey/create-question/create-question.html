@@ -1,0 +1,56 @@
+<section class="create-question" [formGroup]="questionForm()">
+  <div class="create-question__question">
+    <header class="create-question__header">
+      <h3 class="create-question__title">{{ questionNumber() }}. Question</h3>
+      <app-icon-button
+        class="create-question__remove"
+        [class.create-question__remove--hidden]="!canRemove()"
+        variant="delete"
+        [ariaLabel]="'Delete question ' + questionNumber()"
+        (buttonClick)="requestRemove()"
+      />
+    </header>
+    <app-text-field formControlName="text" [ariaLabel]="'Question ' + questionNumber()" />
+  </div>
+
+  <div class="create-question__answers">
+    <header class="create-question__header">
+      <h4 class="create-question__subtitle">Answers</h4>
+      <app-checkbox
+        class="create-question__multiple-choice"
+        [isOnDark]="true"
+        [checked]="questionForm().controls.isMultipleChoice.value"
+        (checkedChange)="setMultipleChoice($event)"
+      >
+        Allow multiple answers.
+      </app-checkbox>
+    </header>
+    <ol class="create-question__answer-list">
+      @for (answerControl of answers.controls; track answerControl; let answerIndex = $index) {
+        @let letter = getLetter(answerIndex);
+        <li class="create-question__answer">
+          <span class="create-question__letter">{{ letter }}.</span>
+          <app-text-field
+            class="create-question__answer-field"
+            [formControl]="answerControl"
+            [ariaLabel]="'Answer ' + letter"
+          />
+          <app-icon-button
+            class="create-question__remove"
+            [class.create-question__remove--hidden]="!canRemoveAnswer"
+            variant="delete"
+            [ariaLabel]="'Delete answer ' + letter"
+            (buttonClick)="removeAnswer(answerIndex)"
+          />
+        </li>
+      }
+    </ol>
+    <app-button
+      class="create-question__add-answer"
+      variant="tertiary"
+      label="Add answer"
+      icon="add"
+      (buttonClick)="addAnswer()"
+    />
+  </div>
+</section>

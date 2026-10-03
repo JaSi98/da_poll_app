@@ -6,6 +6,7 @@ $checkbox-box-margin: 3px;
 $checkbox-border-width: 1.5px;
 $checkbox-radius: 3px;
 $checkbox-label-gap: 16px;
+$checkbox-label-gap-on-dark: 10px;
 $checkbox-check-width: 10px;
 $checkbox-check-height: 8px;
 
@@ -28,6 +29,10 @@ $checkbox-check-height: 8px;
 
   &--top-aligned {
     align-items: flex-start;
+  }
+
+  &--on-dark {
+    gap: $checkbox-label-gap-on-dark;
   }
 
   &__input {
@@ -64,4 +69,8 @@ $checkbox-check-height: 8px;
 .checkbox__input:checked + .checkbox__box {
   border-color: $color-primary-orange;
   background-color: $color-primary-orange;
+}
+
+.checkbox--on-dark .checkbox__input:not(:checked) + .checkbox__box {
+  border-color: $color-white;
 }
