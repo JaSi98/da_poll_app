@@ -29,6 +29,8 @@ $questions-row-gap: 48px;
 $dialog-motion-duration: 250ms;
 $dialog-hidden-transform: translateY(24px) scale(0.98);
 $dialog-backdrop-color: rgba(0, 0, 0, 0.1);
+$required-hint-gap: 16px;
+$required-hint-line-height: 18px;
 
 // The mobile dialog starts below the page logo, so the logo stays visible.
 $mobile-dialog-top-offset: 152px;
@@ -162,6 +164,21 @@ $mobile-field-gap: 16px;
       gap: $mobile-panel-gap;
       padding: $mobile-panel-padding;
     }
+  }
+
+  &__required-hint {
+    margin: 0 0 (-$panel-gap + $required-hint-gap);
+    font-size: $font-size-s;
+    line-height: $required-hint-line-height;
+
+    @include mobile {
+      margin-bottom: -$mobile-panel-gap + $required-hint-gap;
+    }
+  }
+
+  &__required {
+    @include required-mark;
+    margin-left: 0;
   }
 
   &__details {

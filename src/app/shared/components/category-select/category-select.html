@@ -3,6 +3,7 @@
   [options]="categoryOptions()"
   [selectedValue]="selectedCategoryId()"
   [isDisabled]="isDisabled()"
+  [isRequired]="true"
   [ariaDescribedBy]="hasError() ? errorId : null"
   (selectedValueChange)="selectCategory($event)"
 />

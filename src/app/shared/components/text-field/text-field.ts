@@ -1,6 +1,6 @@
-import { Component, DestroyRef, OnInit, inject, input, signal } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { Component, DestroyRef, DoCheck, inject, input, signal } from '@angular/core';
 import { AbstractControl, ControlValueAccessor, NgControl } from '@angular/forms';
+import { Subscription } from 'rxjs';
 
 export type TextFieldType = 'text' | 'date';
 
@@ -12,14 +12,17 @@ let nextTextFieldId = 0;
   styleUrl: './text-field.scss',
   templateUrl: './text-field.html',
 })
-export class TextField implements ControlValueAccessor, OnInit {
+export class TextField implements ControlValueAccessor, DoCheck {
   private readonly ngControl = inject(NgControl, { self: true, optional: true });
   private readonly destroyRef = inject(DestroyRef);
   private onChange: (value: string) => void = () => {};
   private onTouched: () => void = () => {};
+  private watchedControl: AbstractControl | null = null;
+  private controlSubscription: Subscription | null = null;
 
   readonly label = input<string | null>(null);
   readonly isOptional = input<boolean>(false);
+  readonly isRequired = input<boolean>(false);
   readonly isMultiline = input<boolean>(false);
   readonly type = input<TextFieldType>('text');
   readonly ariaLabel = input<string | null>(null);
@@ -35,17 +38,15 @@ export class TextField implements ControlValueAccessor, OnInit {
     if (this.ngControl) {
       this.ngControl.valueAccessor = this;
     }
+    this.destroyRef.onDestroy(() => this.controlSubscription?.unsubscribe());
   }
 
-  /** Watches the form control so errors also appear after markAllAsTouched(). */
-  ngOnInit(): void {
-    const control = this.ngControl?.control;
-    if (!control) {
-      return;
+  /** Follows the form control, because the form directive swaps it when a form is rebuilt. */
+  ngDoCheck(): void {
+    const control = this.ngControl?.control ?? null;
+    if (control !== this.watchedControl) {
+      this.watchControl(control);
     }
-    control.events
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe(() => this.updateErrorState(control));
   }
 
   /** Writes a value from the form model into the field. */
@@ -78,6 +79,17 @@ export class TextField implements ControlValueAccessor, OnInit {
   /** Reports to the form that the user has left the field. */
   protected markAsTouched(): void {
     this.onTouched();
+  }
+
+  /** Watches the control so errors also appear after markAllAsTouched(). */
+  private watchControl(control: AbstractControl | null): void {
+    this.controlSubscription?.unsubscribe();
+    this.watchedControl = control;
+    this.controlSubscription =
+      control?.events.subscribe(() => this.updateErrorState(control)) ?? null;
+    if (control) {
+      this.updateErrorState(control);
+    }
   }
 
   /** Shows the error only after the user has interacted with an invalid field. */

@@ -51,6 +51,10 @@ $dropdown-selection-padding: 0 10px;
     }
   }
 
+  &__required {
+    @include required-mark;
+  }
+
   &__arrow {
     width: $dropdown-icon-size;
     height: $dropdown-icon-size;

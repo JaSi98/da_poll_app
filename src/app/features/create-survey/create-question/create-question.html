@@ -1,19 +1,29 @@
 <section class="create-question" [formGroup]="questionForm()">
   <div class="create-question__question">
     <header class="create-question__header">
-      <h3 class="create-question__title">{{ questionNumber() }}. Question</h3>
+      <h3 class="create-question__title">
+        {{ questionNumber() }}. Question
+        <span class="create-question__required" aria-hidden="true">*</span>
+      </h3>
       <app-icon-button
         variant="delete"
         [ariaLabel]="(canRemove() ? 'Delete question ' : 'Clear question ') + questionNumber()"
         (buttonClick)="removeOrClear()"
       />
     </header>
-    <app-text-field formControlName="text" [ariaLabel]="'Question ' + questionNumber()" />
+    <app-text-field
+      formControlName="text"
+      [ariaLabel]="'Question ' + questionNumber()"
+      [isRequired]="true"
+    />
   </div>
 
   <div class="create-question__answers">
     <header class="create-question__header">
-      <h4 class="create-question__subtitle">Answers</h4>
+      <h4 class="create-question__subtitle">
+        Answers
+        <span class="create-question__required" aria-hidden="true">*</span>
+      </h4>
       <app-checkbox
         class="create-question__multiple-choice"
         [isOnDark]="true"
@@ -32,6 +42,7 @@
             class="create-question__answer-field"
             [formControl]="answerControl"
             [ariaLabel]="'Answer ' + letter"
+            [isRequired]="true"
           />
           <app-icon-button
             class="create-question__remove"

@@ -27,6 +27,10 @@ $text-field-line-height: 20px;
     white-space: nowrap;
   }
 
+  &__required {
+    @include required-mark;
+  }
+
   &__optional {
     margin-left: $text-field-optional-spacing;
     font-weight: $font-weight-regular;

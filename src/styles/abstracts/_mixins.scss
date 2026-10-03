@@ -37,6 +37,14 @@ $form-error-line-height: 18px;
   line-height: $form-error-line-height;
 }
 
+$required-mark-spacing: 0.25em;
+
+// The asterisk behind labels of required fields.
+@mixin required-mark {
+  margin-left: $required-mark-spacing;
+  color: $color-primary-orange;
+}
+
 $page-max-width: 1220px;
 $page-side-gutter: 16px;
 

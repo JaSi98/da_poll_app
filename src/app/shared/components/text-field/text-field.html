@@ -1,6 +1,9 @@
 @if (label(); as labelText) {
   <label class="text-field__label" [for]="fieldId">
     {{ labelText }}
+    @if (isRequired()) {
+      <span class="text-field__required" aria-hidden="true">*</span>
+    }
     @if (isOptional()) {
       <span class="text-field__optional">(optional)</span>
     }
@@ -13,6 +16,7 @@
     [value]="value()"
     [disabled]="isDisabled()"
     [attr.aria-label]="ariaLabel()"
+    [attr.aria-required]="isRequired() || null"
     [attr.aria-invalid]="hasError()"
     [attr.aria-describedby]="hasError() ? errorId : null"
     (input)="updateValue($event)"
@@ -26,6 +30,7 @@
     [value]="value()"
     [disabled]="isDisabled()"
     [attr.aria-label]="ariaLabel()"
+    [attr.aria-required]="isRequired() || null"
     [attr.aria-invalid]="hasError()"
     [attr.aria-describedby]="hasError() ? errorId : null"
     (input)="updateValue($event)"

@@ -1,5 +1,6 @@
 @use '../../../../styles/abstracts/colors' as *;
 @use '../../../../styles/abstracts/typography' as *;
+@use '../../../../styles/abstracts/mixins' as *;
 
 $create-question-gap: 24px;
 $create-question-question-gap: 8px;
@@ -36,6 +37,10 @@ $create-question-add-answer-indent: 20px;
     font-size: $font-size-l;
     font-weight: $font-weight-bold;
     line-height: $create-question-heading-line-height;
+  }
+
+  &__required {
+    @include required-mark;
   }
 
   &__multiple-choice {

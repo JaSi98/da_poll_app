@@ -9,6 +9,7 @@ import {
   signal,
   untracked,
 } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 
 import { Button } from '../../../shared/components/button/button';
@@ -20,6 +21,8 @@ import { SurveyDetail } from '../../../shared/models/survey';
 import { SurveyService } from '../../../shared/services/survey-service';
 import { VotedSurveyStorage } from '../../../shared/services/voted-survey-storage';
 import { isSurveyActive, withUpdatedVotes } from '../../../shared/utils/survey-utils';
+
+const APP_NAME = 'Poll App';
 
 type AnswerSelection = Record<number, number[]>;
 
@@ -34,6 +37,7 @@ export class SurveyDetailPage {
   private readonly votedSurveyStorage = inject(VotedSurveyStorage);
   private readonly destroyRef = inject(DestroyRef);
   private readonly router = inject(Router);
+  private readonly title = inject(Title);
 
   readonly id = input.required<string>();
 
@@ -91,11 +95,13 @@ export class SurveyDetailPage {
     this.router.navigate(['/']).catch((error: unknown) => console.error(error));
   }
 
-  /** Loads the survey and checks whether this browser has already voted. */
+  /** Loads the survey, shows its title in the browser tab and checks for an earlier vote. */
   private async loadSurvey(surveyId: number): Promise<void> {
     this.resetState();
     try {
-      this.survey.set(await this.surveyService.loadSurvey(surveyId));
+      const survey = await this.surveyService.loadSurvey(surveyId);
+      this.survey.set(survey);
+      this.title.setTitle(`${survey.title} – ${APP_NAME}`);
       this.hasVoted.set(this.votedSurveyStorage.hasVoted(surveyId));
     } catch (error: unknown) {
       console.error(error);

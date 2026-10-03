@@ -30,6 +30,9 @@
     </header>
 
     <div class="create-survey-dialog__panel">
+      <p class="create-survey-dialog__required-hint">
+        <span class="create-survey-dialog__required" aria-hidden="true">*</span> Required field
+      </p>
       <div class="create-survey-dialog__details">
         <div class="create-survey-dialog__column">
           <div class="create-survey-dialog__field-row">
@@ -37,6 +40,7 @@
               class="create-survey-dialog__field"
               formControlName="title"
               label="Survey name"
+              [isRequired]="true"
             />
             <app-icon-button
               class="create-survey-dialog__clear"

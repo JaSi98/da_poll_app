@@ -25,6 +25,7 @@ export class Dropdown {
   readonly options = input.required<DropdownOption[]>();
   readonly selectedValue = model<DropdownValue>(null);
   readonly isDisabled = input<boolean>(false);
+  readonly isRequired = input<boolean>(false);
   readonly ariaDescribedBy = input<string | null>(null);
 
   protected readonly listboxId = `dropdown-listbox-${nextDropdownId++}`;

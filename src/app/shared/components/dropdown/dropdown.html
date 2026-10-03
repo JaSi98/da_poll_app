@@ -8,11 +8,17 @@
   [attr.aria-controls]="listboxId"
   [attr.aria-activedescendant]="activeOptionId()"
   [attr.aria-describedby]="ariaDescribedBy()"
+  [attr.aria-required]="isRequired() || null"
   [disabled]="isDisabled()"
   (click)="toggle()"
   (keydown)="handleKeydown($event)"
 >
-  <span>{{ label() }}</span>
+  <span>
+    {{ label() }}
+    @if (isRequired()) {
+      <span class="dropdown__required" aria-hidden="true">*</span>
+    }
+  </span>
   <svg class="dropdown__arrow" viewBox="0 0 24 24" aria-hidden="true">
     <use href="assets/icons/arrow-drop-down.svg#icon"></use>
   </svg>
