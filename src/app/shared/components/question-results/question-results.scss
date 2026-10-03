@@ -1,0 +1,30 @@
+@use '../../../../styles/abstracts/colors' as *;
+@use '../../../../styles/abstracts/typography' as *;
+
+$question-results-gap: 24px;
+$question-results-title-line-height: 23px;
+$question-results-row-gap: 15px;
+
+.question-results {
+  display: flex;
+  flex-direction: column;
+  gap: $question-results-gap;
+
+  &__title {
+    margin: 0;
+    color: $color-primary-purple;
+    font-family: $font-family-secondary;
+    font-size: $font-size-l;
+    font-weight: $font-weight-bold;
+    line-height: $question-results-title-line-height;
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: $question-results-row-gap;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+}

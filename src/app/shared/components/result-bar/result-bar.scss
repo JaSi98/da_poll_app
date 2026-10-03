@@ -5,6 +5,7 @@ $result-bar-gap: 6px;
 $result-bar-letter-width: 15px;
 $result-bar-value-width: 31px;
 $result-bar-height: 14px;
+$result-bar-line-height: 15px;
 $result-bar-end-radius: 20px;
 $result-bar-transition: 300ms ease-out;
 
@@ -15,6 +16,7 @@ $result-bar-transition: 300ms ease-out;
   margin: 0;
   font-family: $font-family-secondary;
   font-size: $font-size-s;
+  line-height: $result-bar-line-height;
 
   &__letter {
     flex-shrink: 0;

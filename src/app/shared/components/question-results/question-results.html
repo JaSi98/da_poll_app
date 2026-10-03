@@ -1,0 +1,14 @@
+<section class="question-results">
+  <h3 class="question-results__title">{{ questionNumber() }}. {{ question().text }}</h3>
+  <ul class="question-results__list">
+    @for (answer of question().answers; track answer.id) {
+      <li>
+        <app-result-bar
+          [optionLetter]="getLetter($index)"
+          [votes]="answer.votes"
+          [totalVotes]="totalVotes()"
+        />
+      </li>
+    }
+  </ul>
+</section>
