@@ -1,0 +1,34 @@
+<button
+  class="dropdown__trigger"
+  [class.dropdown__trigger--open]="isOpen()"
+  type="button"
+  role="combobox"
+  aria-haspopup="listbox"
+  [attr.aria-expanded]="isOpen()"
+  [attr.aria-controls]="listboxId"
+  [attr.aria-activedescendant]="activeOptionId()"
+  (click)="toggle()"
+  (keydown)="handleKeydown($event)"
+>
+  <span>{{ label() }}</span>
+  <svg class="dropdown__arrow" viewBox="0 0 24 24" aria-hidden="true">
+    <use href="assets/icons/arrow-drop-down.svg#icon"></use>
+  </svg>
+</button>
+@if (isOpen()) {
+  <ul class="dropdown__menu" role="listbox" [id]="listboxId" [attr.aria-label]="label()">
+    @for (option of options(); track option.value) {
+      <li
+        class="dropdown__option"
+        [class.dropdown__option--active]="$index === activeIndex()"
+        role="option"
+        [id]="getOptionId($index)"
+        [attr.aria-selected]="option.value === selectedValue()"
+        (click)="selectOption(option)"
+        (mouseenter)="setActiveIndex($index)"
+      >
+        {{ option.label }}
+      </li>
+    }
+  </ul>
+}

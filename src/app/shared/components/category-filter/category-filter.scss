@@ -1,0 +1,26 @@
+@use '../../../../styles/abstracts/colors' as *;
+@use '../../../../styles/abstracts/typography' as *;
+
+$category-filter-width: 206px;
+$category-filter-gap: 4px;
+$category-filter-selection-padding: 0 10px;
+$category-filter-selection-line-height: 18px;
+$category-filter-selection-letter-spacing: 0.02em;
+
+:host {
+  display: flex;
+  flex-direction: column;
+  gap: $category-filter-gap;
+  width: $category-filter-width;
+}
+
+.category-filter__selection {
+  margin: 0;
+  padding: $category-filter-selection-padding;
+  color: $color-primary-orange;
+  font-family: $font-family-secondary;
+  font-size: $font-size-s;
+  font-weight: $font-weight-regular;
+  line-height: $category-filter-selection-line-height;
+  letter-spacing: $category-filter-selection-letter-spacing;
+}

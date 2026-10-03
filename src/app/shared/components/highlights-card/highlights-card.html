@@ -1,8 +1,4 @@
-<article
-  class="highlights-card"
-  (mouseenter)="setHovered(true)"
-  (mouseleave)="setHovered(false)"
->
+<article class="highlights-card" (mouseenter)="setHovered(true)" (mouseleave)="setHovered(false)">
   <a class="highlights-card__link" [routerLink]="surveyLink()">
     <header class="highlights-card__header">
       <p class="highlights-card__category">{{ survey().category }}</p>

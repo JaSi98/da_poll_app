@@ -1,0 +1,89 @@
+@use '../../../../styles/abstracts/colors' as *;
+@use '../../../../styles/abstracts/typography' as *;
+
+$dropdown-radius: 6px;
+$dropdown-trigger-padding: 4px 6px 4px 10px;
+$dropdown-trigger-line-height: 23px;
+$dropdown-icon-size: 24px;
+$dropdown-menu-offset: 4px;
+$dropdown-menu-padding: 8px 4px;
+$dropdown-menu-gap: 4px;
+$dropdown-option-padding: 4px;
+$dropdown-option-line-height: 18px;
+$dropdown-option-letter-spacing: 0.02em;
+$dropdown-menu-layer: 1;
+
+:host {
+  position: relative;
+  display: block;
+  font-family: $font-family-secondary;
+}
+
+.dropdown {
+  &__trigger {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: $dropdown-trigger-padding;
+    border: none;
+    border-radius: $dropdown-radius;
+    background-color: transparent;
+    color: $color-white;
+    font-family: inherit;
+    font-size: $font-size-l;
+    font-weight: $font-weight-bold;
+    line-height: $dropdown-trigger-line-height;
+    cursor: pointer;
+
+    &:hover {
+      background-color: rgba($color-neutral-grey, 0.12);
+    }
+  }
+
+  &__arrow {
+    width: $dropdown-icon-size;
+    height: $dropdown-icon-size;
+  }
+
+  &__menu {
+    position: absolute;
+    top: calc(100% + #{$dropdown-menu-offset});
+    left: 0;
+    z-index: $dropdown-menu-layer;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: $dropdown-menu-gap;
+    box-sizing: border-box;
+    width: 100%;
+    margin: 0;
+    padding: $dropdown-menu-padding;
+    border-radius: $dropdown-radius;
+    background-color: $color-white;
+    list-style: none;
+  }
+
+  &__option {
+    padding: $dropdown-option-padding;
+    border-radius: $dropdown-radius;
+    color: $color-primary-purple;
+    font-size: $font-size-s;
+    font-weight: $font-weight-regular;
+    line-height: $dropdown-option-line-height;
+    letter-spacing: $dropdown-option-letter-spacing;
+    cursor: pointer;
+
+    &--active {
+      background-color: $color-bg-card-hover;
+    }
+  }
+}
+
+.dropdown__trigger:hover .dropdown__arrow {
+  color: $color-primary-orange;
+}
+
+.dropdown__trigger--open .dropdown__arrow {
+  transform: rotate(180deg);
+}

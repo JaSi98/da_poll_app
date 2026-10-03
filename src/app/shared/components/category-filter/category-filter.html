@@ -1,0 +1,9 @@
+<app-dropdown
+  label="Sort by categories"
+  [options]="categoryOptions()"
+  [selectedValue]="selectedCategoryId()"
+  (selectedValueChange)="selectCategory($event)"
+/>
+@if (selectedCategoryName(); as categoryName) {
+  <p class="category-filter__selection">{{ categoryName }}</p>
+}
