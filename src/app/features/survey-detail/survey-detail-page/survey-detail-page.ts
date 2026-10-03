@@ -9,6 +9,7 @@ import {
   signal,
   untracked,
 } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { Button } from '../../../shared/components/button/button';
 import { QuestionComponent } from '../../../shared/components/question/question';
@@ -32,6 +33,7 @@ export class SurveyDetailPage {
   private readonly surveyService = inject(SurveyService);
   private readonly votedSurveyStorage = inject(VotedSurveyStorage);
   private readonly destroyRef = inject(DestroyRef);
+  private readonly router = inject(Router);
 
   readonly id = input.required<string>();
 
@@ -82,6 +84,11 @@ export class SurveyDetailPage {
       return;
     }
     await this.submitVotes();
+  }
+
+  /** Leaves the survey and returns to the overview. */
+  protected closeSurvey(): void {
+    this.router.navigate(['/']).catch((error: unknown) => console.error(error));
   }
 
   /** Loads the survey and checks whether this browser has already voted. */

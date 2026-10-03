@@ -28,6 +28,25 @@ $list-visible-height: 413px;
 $scrollbar-offset: 15px;
 $hint-line-height: 20px;
 
+$mobile-content-top: 54px;
+$mobile-content-bottom: 48px;
+$mobile-section-gap: 80px;
+$mobile-hero-gap: 54px;
+$mobile-intro-gap: 24px;
+$mobile-title-size: 62px;
+$mobile-title-line-height: 50px;
+$mobile-lead-line-height: 23px;
+$mobile-section-title-size: 54px;
+$mobile-section-title-line-height: 55px;
+$mobile-block-gap: 48px;
+$mobile-subtitle-line-height: 30px;
+$mobile-subtitle-gap: 16px;
+$mobile-highlights-card-width: 250px;
+$mobile-highlights-gap: 16px;
+$mobile-tabs-gap: 16px;
+$mobile-list-offset: 24px;
+$tablet-highlights-columns: 2;
+
 :host {
   @include focus-ring-on-dark;
   display: block;
@@ -43,11 +62,25 @@ $hint-line-height: 20px;
   padding-top: $home-content-top;
   padding-bottom: $home-content-bottom;
 
+  @include mobile {
+    gap: $mobile-section-gap;
+    padding-top: $mobile-content-top;
+    padding-bottom: $mobile-content-bottom;
+  }
+
   &__hero {
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: $hero-gap;
+
+    @include tablet {
+      flex-direction: column;
+    }
+
+    @include mobile {
+      gap: $mobile-intro-gap;
+    }
   }
 
   &__intro {
@@ -56,6 +89,11 @@ $hint-line-height: 20px;
     align-items: flex-start;
     gap: $intro-gap;
     max-width: $intro-width;
+
+    // The visual sits between title and lead text on mobile.
+    @include mobile {
+      display: contents;
+    }
   }
 
   &__title {
@@ -65,6 +103,12 @@ $hint-line-height: 20px;
     font-size: $title-size;
     font-weight: $font-weight-regular;
     line-height: $title-line-height;
+
+    @include mobile {
+      align-self: stretch;
+      font-size: $mobile-title-size;
+      line-height: $mobile-title-line-height;
+    }
   }
 
   &__lead {
@@ -74,10 +118,22 @@ $hint-line-height: 20px;
     font-size: $font-size-xl;
     font-weight: $font-weight-semibold;
     line-height: $lead-line-height;
+
+    @include mobile {
+      order: 1;
+      align-self: stretch;
+      font-size: $font-size-l;
+      line-height: $mobile-lead-line-height;
+    }
   }
 
   &__new-survey {
     margin-top: $intro-button-offset;
+
+    @include mobile {
+      order: 2;
+      margin-top: $mobile-hero-gap - $mobile-intro-gap;
+    }
   }
 
   &__surveys {
@@ -93,6 +149,12 @@ $hint-line-height: 20px;
     font-weight: $font-weight-regular;
     line-height: $section-title-line-height;
     text-align: center;
+
+    @include mobile {
+      margin-bottom: $mobile-block-gap;
+      font-size: $mobile-section-title-size;
+      line-height: $mobile-section-title-line-height;
+    }
   }
 
   &__ending-soon {
@@ -100,6 +162,11 @@ $hint-line-height: 20px;
     flex-direction: column;
     gap: $subtitle-gap;
     margin-bottom: $home-section-gap;
+
+    @include mobile {
+      gap: $mobile-subtitle-gap;
+      margin-bottom: $mobile-block-gap;
+    }
   }
 
   &__subtitle {
@@ -108,6 +175,11 @@ $hint-line-height: 20px;
     font-size: $subtitle-size;
     font-weight: $font-weight-medium;
     line-height: $subtitle-line-height;
+
+    @include mobile {
+      font-size: $font-size-xl;
+      line-height: $mobile-subtitle-line-height;
+    }
   }
 
   &__highlights {
@@ -119,17 +191,44 @@ $hint-line-height: 20px;
     max-height: $highlights-card-height + $focus-ring-room * 2;
     overflow-y: auto;
     list-style: none;
+
+    @include tablet {
+      grid-template-columns: repeat($tablet-highlights-columns, minmax(0, 1fr));
+    }
+
+    // One scrollable row that runs to the screen edges, so the next card peeks in.
+    @include mobile {
+      grid-template-columns: none;
+      grid-auto-columns: $mobile-highlights-card-width;
+      grid-auto-flow: column;
+      gap: $mobile-highlights-gap;
+      margin-inline: -$page-side-gutter;
+      padding-inline: $page-side-gutter;
+      scroll-padding-inline: $page-side-gutter;
+      max-height: none;
+      overflow: auto hidden;
+    }
   }
 
   &__list-controls {
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    @include mobile {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: $mobile-block-gap;
+    }
   }
 
   &__tabs {
     display: flex;
     gap: $tabs-gap;
+
+    @include mobile {
+      gap: $mobile-tabs-gap;
+    }
   }
 
   &__survey-list {
@@ -142,6 +241,21 @@ $hint-line-height: 20px;
     max-height: $list-visible-height + $focus-ring-room * 2;
     overflow-y: auto;
     list-style: none;
+
+    // The scrollbar room must fit into the page gutter, otherwise the page scrolls sideways.
+    @include tablet {
+      @include focus-ring-room($page-side-gutter - $focus-ring-room);
+      margin-top: $list-offset - $focus-ring-room;
+    }
+
+    // On mobile the page scrolls instead of the list, so no room for ring and scrollbar is needed.
+    @include mobile {
+      grid-template-columns: minmax(0, 1fr);
+      margin: $mobile-list-offset 0 0;
+      padding: 0;
+      max-height: none;
+      overflow: visible;
+    }
   }
 
   &__hint {

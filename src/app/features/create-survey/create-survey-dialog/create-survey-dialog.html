@@ -12,7 +12,21 @@
           Create new survey
         </h2>
       </hgroup>
-      <app-button variant="secondary" label="Cancel" icon="close" (buttonClick)="cancel()" />
+      <app-button
+        class="create-survey-dialog__cancel"
+        variant="secondary"
+        label="Cancel"
+        icon="close"
+        (buttonClick)="cancel()"
+      />
+      <app-button
+        class="create-survey-dialog__close"
+        variant="secondary"
+        label="Cancel"
+        icon="close"
+        [isIconOnly]="true"
+        (buttonClick)="cancel()"
+      />
     </header>
 
     <div class="create-survey-dialog__panel">
@@ -91,7 +105,7 @@
       @if (hasPublishError()) {
         <p class="create-survey-dialog__error" role="alert">Publishing failed. Please try again.</p>
       }
-      <app-button type="submit" label="Publish" [isDisabled]="isPublishing()" />
+      <app-button type="submit" label="Publish" icon="check" [isDisabled]="isPublishing()" />
     </footer>
   </form>
 </dialog>

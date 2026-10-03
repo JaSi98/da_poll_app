@@ -30,6 +30,15 @@ $dialog-motion-duration: 250ms;
 $dialog-hidden-transform: translateY(24px) scale(0.98);
 $dialog-backdrop-color: rgba(0, 0, 0, 0.1);
 
+// The mobile dialog starts below the page logo, so the logo stays visible.
+$mobile-dialog-top-offset: 152px;
+$mobile-dialog-padding: 40px $page-side-gutter;
+$mobile-heading-gap: 16px;
+$mobile-title-line-height: 42px;
+$mobile-panel-padding: 40px 10px;
+$mobile-panel-gap: 48px;
+$mobile-field-gap: 16px;
+
 .create-survey-dialog {
   box-sizing: border-box;
   width: $dialog-width;
@@ -51,6 +60,15 @@ $dialog-backdrop-color: rgba(0, 0, 0, 0.1);
     transform $dialog-motion-duration $motion-easing,
     overlay $dialog-motion-duration allow-discrete,
     display $dialog-motion-duration allow-discrete;
+
+  @include mobile {
+    width: 100%;
+    max-width: 100%;
+    height: calc(100dvh - #{$mobile-dialog-top-offset});
+    max-height: none;
+    margin: $mobile-dialog-top-offset 0 0;
+    padding: $mobile-dialog-padding;
+  }
 
   &[open] {
     opacity: 1;
@@ -75,6 +93,11 @@ $dialog-backdrop-color: rgba(0, 0, 0, 0.1);
     flex-direction: column;
     gap: $dialog-section-gap;
     max-height: calc(100dvh - #{$dialog-viewport-gutter} - #{$dialog-vertical-padding * 2});
+
+    @include mobile {
+      height: 100%;
+      max-height: none;
+    }
   }
 
   &__header {
@@ -89,6 +112,25 @@ $dialog-backdrop-color: rgba(0, 0, 0, 0.1);
     flex-direction: column;
     align-items: flex-start;
     margin: 0;
+
+    @include mobile {
+      gap: $mobile-heading-gap;
+    }
+  }
+
+  // Mobile replaces the labelled Cancel button with an X.
+  &__close {
+    display: none;
+  }
+
+  @include mobile {
+    &__cancel {
+      display: none;
+    }
+
+    &__close {
+      display: block;
+    }
   }
 
   &__title {
@@ -98,6 +140,10 @@ $dialog-backdrop-color: rgba(0, 0, 0, 0.1);
     font-size: $font-size-display;
     font-weight: $font-weight-regular;
     line-height: $dialog-title-line-height;
+
+    @include mobile {
+      line-height: $mobile-title-line-height;
+    }
   }
 
   &__panel {
@@ -111,12 +157,27 @@ $dialog-backdrop-color: rgba(0, 0, 0, 0.1);
     padding: $panel-padding;
     border-radius: $panel-radius;
     background-color: rgba($color-muted-purple, 0.16);
+
+    @include mobile {
+      gap: $mobile-panel-gap;
+      padding: $mobile-panel-padding;
+    }
   }
 
   &__details {
     display: flex;
     align-items: flex-start;
     gap: $panel-gap;
+
+    @include tablet {
+      flex-direction: column;
+      align-items: stretch;
+      gap: $details-row-gap;
+    }
+
+    @include mobile {
+      gap: $mobile-field-gap;
+    }
   }
 
   &__column {
@@ -124,6 +185,14 @@ $dialog-backdrop-color: rgba(0, 0, 0, 0.1);
     flex-direction: column;
     gap: $details-row-gap;
     width: $details-column-width;
+
+    @include tablet {
+      width: auto;
+    }
+
+    @include mobile {
+      gap: $mobile-field-gap;
+    }
   }
 
   &__field-row {
@@ -134,6 +203,20 @@ $dialog-backdrop-color: rgba(0, 0, 0, 0.1);
     &--top {
       align-items: flex-start;
       width: $description-field-width + $field-row-gap + $clear-button-size;
+
+      @include tablet {
+        width: auto;
+      }
+    }
+  }
+
+  // On mobile the category moves above the end date, as its own line.
+  &__field-row:has(&__category) {
+    @include mobile {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: end;
+      gap: $mobile-field-gap $field-row-gap;
     }
   }
 
@@ -143,6 +226,10 @@ $dialog-backdrop-color: rgba(0, 0, 0, 0.1);
     &--date {
       flex-grow: 0;
       width: $date-field-width;
+
+      @include mobile {
+        width: auto;
+      }
     }
   }
 
@@ -159,6 +246,12 @@ $dialog-backdrop-color: rgba(0, 0, 0, 0.1);
   &__category {
     align-self: flex-start;
     margin-left: auto;
+
+    @include mobile {
+      grid-row: 1;
+      grid-column: 1 / -1;
+      margin-left: 0;
+    }
   }
 
   &__questions {
@@ -166,11 +259,19 @@ $dialog-backdrop-color: rgba(0, 0, 0, 0.1);
     grid-template-columns: repeat(2, minmax(0, 1fr));
     column-gap: $questions-column-gap;
     row-gap: $questions-row-gap;
+
+    @include tablet {
+      grid-template-columns: minmax(0, 1fr);
+    }
   }
 
   &__add-question {
     align-self: start;
     justify-self: start;
+
+    @include mobile {
+      justify-self: center;
+    }
   }
 
   &__footer {
@@ -180,6 +281,11 @@ $dialog-backdrop-color: rgba(0, 0, 0, 0.1);
     align-items: center;
     gap: $field-row-gap;
     margin-top: $dialog-footer-offset;
+
+    @include mobile {
+      flex-direction: column;
+      justify-content: center;
+    }
   }
 
   &__error {

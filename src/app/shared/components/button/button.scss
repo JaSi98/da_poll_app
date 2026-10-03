@@ -4,6 +4,7 @@
 @use '../../../../styles/abstracts/mixins' as *;
 
 $icon-size: 24px;
+$icon-only-size: 16px;
 $primary-icon-transition: 300ms ease-out;
 
 $button-variants: (
@@ -101,6 +102,14 @@ $button-variants: (
   }
 }
 
+@mixin show-primary-icon {
+  .button__icon {
+    width: $icon-size;
+    margin-left: map.get($button-variants, primary, icon-gap);
+    opacity: 1;
+  }
+}
+
 .button--primary {
   transition: background-color $primary-icon-transition;
 
@@ -115,16 +124,32 @@ $button-variants: (
   }
 
   @include hover-enabled {
-    .button__icon {
-      width: $icon-size;
-      margin-left: map.get($button-variants, primary, icon-gap);
-      opacity: 1;
-    }
+    @include show-primary-icon;
+  }
+
+  // Touch screens have no hover, so the icon is always shown on mobile.
+  @include mobile {
+    @include show-primary-icon;
   }
 }
 
 .button--tertiary .button__content {
   border-bottom: 1px solid currentColor;
+}
+
+// The label stays available to screen readers as the accessible name.
+.button--icon-only {
+  position: relative;
+
+  .button__label {
+    @include visually-hidden;
+  }
+
+  .button__icon {
+    width: $icon-only-size;
+    height: $icon-only-size;
+    margin-left: 0;
+  }
 }
 
 // Light text would disappear on light backgrounds, so the secondary button switches to dark text there.

@@ -1,6 +1,10 @@
 <header class="site-header">
   <app-logo [variant]="logoVariant()" />
   @if (hasCreateButton()) {
-    <app-button label="Create survey" (buttonClick)="openCreateDialog()" />
+    <app-button
+      class="site-header__create"
+      label="Create survey"
+      (buttonClick)="openCreateDialog()"
+    />
   }
 </header>

@@ -3,6 +3,7 @@
 @use '../../../../styles/abstracts/mixins' as *;
 
 $survey-list-item-padding: 12px 20px;
+$survey-list-item-mobile-padding: 12px 16px;
 $survey-list-item-radius: 5px 50px 5px 5px;
 $survey-list-item-gap: 24px;
 $survey-list-item-header-gap: 8px;
@@ -26,6 +27,10 @@ $survey-list-item-transition: 300ms ease-out;
     padding: $survey-list-item-padding;
     font-family: $font-family-secondary;
     text-decoration: none;
+
+    @include mobile {
+      padding: $survey-list-item-mobile-padding;
+    }
   }
 
   &__header {

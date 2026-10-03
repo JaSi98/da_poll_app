@@ -102,12 +102,18 @@ export class CreateSurveyDialog {
       const surveyId = await this.surveyService.createSurvey(toNewSurvey(this.surveyForm));
       this.published.emit(surveyId);
       this.isOpen.set(false);
+      this.refreshSurveyList();
     } catch (error: unknown) {
       console.error(error);
       this.hasPublishError.set(true);
     } finally {
       this.isPublishing.set(false);
     }
+  }
+
+  /** Reloads the survey lists so the new survey appears without a page reload. */
+  private refreshSurveyList(): void {
+    this.surveyService.loadSurveys().catch((error: unknown) => console.error(error));
   }
 
   /** Opens the dialog with an empty form, or closes it; resetting on open keeps the closing animation calm. */

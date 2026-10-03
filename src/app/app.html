@@ -1,6 +1,8 @@
 <router-outlet />
-<app-create-survey-dialog
-  [(isOpen)]="launcher.isDialogOpen"
-  (published)="launcher.handlePublished($event)"
-/>
+@defer (when launcher.isDialogOpen()) {
+  <app-create-survey-dialog
+    [(isOpen)]="launcher.isDialogOpen"
+    (published)="launcher.handlePublished($event)"
+  />
+}
 <app-publish-confirmation [(surveyId)]="launcher.publishedSurveyId" />

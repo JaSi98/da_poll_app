@@ -21,6 +21,16 @@ $results-title-size: 32px;
 $results-title-line-height: 39px;
 $no-results-offset: 80px;
 
+$mobile-content-top: 54px;
+$mobile-content-bottom: 48px;
+$mobile-content-gap: 56px;
+$mobile-survey-padding: 40px 12px;
+$mobile-survey-corner-radius: 100px;
+$mobile-survey-gap: 24px;
+$mobile-title-size: 48px;
+$mobile-title-line-height: 42px;
+$mobile-section-gap: 40px;
+
 :host {
   display: block;
   min-height: 100vh;
@@ -33,11 +43,24 @@ $no-results-offset: 80px;
   padding-bottom: $page-content-bottom;
   color: $color-primary-purple;
 
+  @include mobile {
+    padding-top: $mobile-content-top;
+    padding-bottom: $mobile-content-bottom;
+  }
+
   &__content {
     display: grid;
     grid-template-columns: minmax(0, $survey-column-share) minmax(0, $results-column-share);
     align-items: center;
     gap: $content-gap;
+
+    @include tablet {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    @include mobile {
+      gap: $mobile-content-gap;
+    }
   }
 
   &__survey {
@@ -48,6 +71,27 @@ $no-results-offset: 80px;
     padding: $survey-padding;
     border-top-right-radius: $survey-corner-radius;
     background-color: rgba($color-muted-purple, 0.1);
+
+    @include mobile {
+      gap: $mobile-survey-gap;
+      padding: $mobile-survey-padding;
+      border-top-right-radius: $mobile-survey-corner-radius;
+    }
+  }
+
+  &__status {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    align-self: stretch;
+  }
+
+  &__close {
+    display: none;
+
+    @include mobile {
+      display: block;
+    }
   }
 
   &__body {
@@ -81,6 +125,11 @@ $no-results-offset: 80px;
     font-size: $font-size-display;
     font-weight: $font-weight-regular;
     line-height: $title-line-height;
+
+    @include mobile {
+      font-size: $mobile-title-size;
+      line-height: $mobile-title-line-height;
+    }
   }
 
   &__description {
@@ -94,6 +143,11 @@ $no-results-offset: 80px;
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: $questions-gap;
+
+    @include mobile {
+      grid-template-columns: minmax(0, 1fr);
+      margin-top: $mobile-section-gap - $survey-body-gap;
+    }
   }
 
   &__footer {
@@ -101,6 +155,25 @@ $no-results-offset: 80px;
     justify-content: flex-end;
     align-items: center;
     gap: $footer-gap;
+
+    @include mobile {
+      margin-top: $mobile-section-gap - $survey-body-gap;
+    }
+  }
+
+  // Desktop and mobile use different button styles for the same action.
+  &__submit--mobile {
+    display: none;
+  }
+
+  @include mobile {
+    &__submit--desktop {
+      display: none;
+    }
+
+    &__submit--mobile {
+      display: block;
+    }
   }
 
   &__error {

@@ -25,6 +25,7 @@ export class Button {
   readonly isActive = input<boolean>(false);
   readonly isDisabled = input<boolean>(false);
   readonly isOnLight = input<boolean>(false);
+  readonly isIconOnly = input<boolean>(false);
 
   readonly buttonClick = output<void>();
 
@@ -38,7 +39,7 @@ export class Button {
     this.buttonClick.emit();
   }
 
-  /** Returns the BEM modifier classes for the variant, the active state and light backgrounds. */
+  /** Returns the BEM modifier classes for variant, active state, background and icon-only use. */
   private getModifierClasses(): string[] {
     const classes = [`button--${this.variant()}`];
     if (this.isActive()) {
@@ -46,6 +47,9 @@ export class Button {
     }
     if (this.isOnLight()) {
       classes.push('button--on-light');
+    }
+    if (this.isIconOnly()) {
+      classes.push('button--icon-only');
     }
     return classes;
   }

@@ -1,11 +1,14 @@
 @use 'sass:list';
 @use 'sass:map';
 @use 'sass:math';
+@use '../../../../styles/abstracts/mixins' as *;
 
 $hero-visual-width: 426px;
 $hero-visual-height: 420px;
 $hero-visual-phone-size: 420px;
 $hero-visual-easing: ease-in-out;
+$hero-visual-mobile-height: 250px;
+$hero-visual-mobile-scale: math.div($hero-visual-mobile-height, $hero-visual-height);
 
 // Boxes are (left, top, width, height) inside the visual, at rest and while hovering.
 // Float describes the gentle idle movement: the end point of a straight back-and-forth line
@@ -69,10 +72,25 @@ $hero-visual-elements: (
   @return translate($offset-x, $offset-y) scale($scale-x, $scale-y);
 }
 
+:host {
+  display: block;
+
+  // The whole composition shrinks as one piece, so all positions inside stay valid.
+  @include mobile {
+    width: $hero-visual-width * $hero-visual-mobile-scale;
+    height: $hero-visual-mobile-height;
+  }
+}
+
 .hero-visual {
   position: relative;
   width: $hero-visual-width;
   height: $hero-visual-height;
+
+  @include mobile {
+    transform: scale($hero-visual-mobile-scale);
+    transform-origin: top left;
+  }
 
   > img {
     position: absolute;

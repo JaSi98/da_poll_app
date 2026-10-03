@@ -3,7 +3,18 @@
   @if (survey(); as survey) {
     <div class="survey-detail-page__content">
       <article class="survey-detail-page__survey" aria-labelledby="survey-detail-title">
-        <app-status-badge status="published" />
+        <div class="survey-detail-page__status">
+          <app-status-badge status="published" />
+          <app-button
+            class="survey-detail-page__close"
+            variant="secondary"
+            label="Close survey"
+            icon="close"
+            [isIconOnly]="true"
+            [isOnLight]="true"
+            (buttonClick)="closeSurvey()"
+          />
+        </div>
         <div class="survey-detail-page__body">
           <div class="survey-detail-page__meta">
             @if (survey.endDate) {
@@ -38,8 +49,16 @@
               </p>
             }
             <app-button
+              class="survey-detail-page__submit survey-detail-page__submit--desktop"
               variant="secondary"
               [isOnLight]="true"
+              [label]="submitLabel()"
+              [isDisabled]="isVotingLocked()"
+              (buttonClick)="completeSurvey()"
+            />
+            <app-button
+              class="survey-detail-page__submit survey-detail-page__submit--mobile"
+              icon="check"
               [label]="submitLabel()"
               [isDisabled]="isVotingLocked()"
               (buttonClick)="completeSurvey()"

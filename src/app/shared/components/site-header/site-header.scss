@@ -1,6 +1,7 @@
 @use '../../../../styles/abstracts/mixins' as *;
 
 $site-header-top-offset: 39px;
+$site-header-mobile-top-offset: 48px;
 
 .site-header {
   @include page-container;
@@ -8,4 +9,15 @@ $site-header-top-offset: 39px;
   justify-content: space-between;
   align-items: center;
   padding-top: $site-header-top-offset;
+
+  @include mobile {
+    padding-top: $site-header-mobile-top-offset;
+  }
+
+  // On mobile a survey is closed with the X in its card instead.
+  &__create {
+    @include mobile {
+      display: none;
+    }
+  }
 }

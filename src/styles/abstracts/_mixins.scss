@@ -46,6 +46,23 @@ $page-side-gutter: 16px;
   margin-inline: auto;
 }
 
+$breakpoint-tablet: 1100px;
+$breakpoint-mobile: 768px;
+
+// Screens narrower than the desktop design; wide side-by-side layouts stack here.
+@mixin tablet {
+  @media (max-width: $breakpoint-tablet) {
+    @content;
+  }
+}
+
+// Screens that get the mobile design.
+@mixin mobile {
+  @media (max-width: $breakpoint-mobile) {
+    @content;
+  }
+}
+
 $scrollbar-width: 8px;
 $scrollbar-radius: 10px;
 $scrollbar-shadow: 3px 3px 3.2px rgba(0, 0, 0, 0.25);
@@ -53,8 +70,10 @@ $scrollbar-shadow: 3px 3px 3.2px rgba(0, 0, 0, 0.25);
 // Orange scrollbar from the design; standard properties for browsers without ::-webkit-scrollbar.
 // The track margins keep the thumb away from rounded corners.
 @mixin custom-scrollbar($track-margin-top: 0, $track-margin-bottom: 0) {
+  // Height applies to horizontal scroll areas.
   &::-webkit-scrollbar {
     width: $scrollbar-width;
+    height: $scrollbar-width;
   }
 
   &::-webkit-scrollbar-track {

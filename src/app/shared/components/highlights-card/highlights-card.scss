@@ -9,6 +9,8 @@ $highlights-card-header-gap: 8px;
 $highlights-card-category-line-height: 18px;
 $highlights-card-title-line-height: 33px;
 $highlights-card-transition: 100ms ease-out;
+$highlights-card-mobile-height: 233px;
+$highlights-card-mobile-padding: 24px 16px;
 
 .highlights-card {
   box-sizing: border-box;
@@ -18,6 +20,11 @@ $highlights-card-transition: 100ms ease-out;
   border-top-right-radius: $highlights-card-corner-radius;
   background-color: $color-bg-card;
   transition: background-color $highlights-card-transition;
+
+  @include mobile {
+    height: $highlights-card-mobile-height;
+    padding: $highlights-card-mobile-padding;
+  }
 
   &:hover {
     background-color: $color-bg-card-hover;
