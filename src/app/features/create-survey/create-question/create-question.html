@@ -3,11 +3,9 @@
     <header class="create-question__header">
       <h3 class="create-question__title">{{ questionNumber() }}. Question</h3>
       <app-icon-button
-        class="create-question__remove"
-        [class.create-question__remove--hidden]="!canRemove()"
         variant="delete"
-        [ariaLabel]="'Delete question ' + questionNumber()"
-        (buttonClick)="requestRemove()"
+        [ariaLabel]="(canRemove() ? 'Delete question ' : 'Clear question ') + questionNumber()"
+        (buttonClick)="removeOrClear()"
       />
     </header>
     <app-text-field formControlName="text" [ariaLabel]="'Question ' + questionNumber()" />

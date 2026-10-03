@@ -1,0 +1,145 @@
+@use '../../../../styles/abstracts/colors' as *;
+@use '../../../../styles/abstracts/typography' as *;
+@use '../../../../styles/abstracts/mixins' as *;
+
+$dialog-width: 1166px;
+$dialog-viewport-gutter: 32px;
+$dialog-padding: 40px 54px;
+$dialog-radius: 5px 100px 5px 5px;
+$dialog-section-gap: 32px;
+$dialog-footer-offset: 16px;
+$dialog-title-line-height: 61px;
+$panel-padding: 40px 32px;
+$panel-radius: 5px 80px 5px 5px;
+$panel-gap: 64px;
+$details-column-width: 470px;
+$details-row-gap: 8px;
+$field-row-gap: 8px;
+$date-field-width: 181px;
+$description-field-width: 418px;
+$field-height: 37px;
+$field-label-height: 26px;
+$clear-button-size: 26px;
+$questions-column-gap: 64px;
+$questions-row-gap: 48px;
+
+.create-survey-dialog {
+  box-sizing: border-box;
+  width: $dialog-width;
+  max-width: calc(100vw - #{$dialog-viewport-gutter});
+  padding: $dialog-padding;
+  border: none;
+  border-radius: $dialog-radius;
+  background-color: $color-primary-purple;
+  color: $color-text-light;
+  font-family: $font-family-secondary;
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: $dialog-section-gap;
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  &__heading {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 0;
+  }
+
+  &__title {
+    margin: 0;
+    color: $color-accent-orange;
+    font-family: $font-family-display;
+    font-size: $font-size-display;
+    font-weight: $font-weight-regular;
+    line-height: $dialog-title-line-height;
+  }
+
+  &__panel {
+    display: flex;
+    flex-direction: column;
+    gap: $panel-gap;
+    padding: $panel-padding;
+    border-radius: $panel-radius;
+    background-color: rgba($color-muted-purple, 0.16);
+  }
+
+  &__details {
+    display: flex;
+    align-items: flex-start;
+    gap: $panel-gap;
+  }
+
+  &__column {
+    display: flex;
+    flex-direction: column;
+    gap: $details-row-gap;
+    width: $details-column-width;
+  }
+
+  &__field-row {
+    display: flex;
+    align-items: flex-end;
+    gap: $field-row-gap;
+
+    &--top {
+      align-items: flex-start;
+      width: $description-field-width + $field-row-gap + $clear-button-size;
+    }
+  }
+
+  &__field {
+    flex-grow: 1;
+
+    &--date {
+      flex-grow: 0;
+      width: $date-field-width;
+    }
+  }
+
+  &__clear {
+    margin-bottom: ($field-height - $clear-button-size) * 0.5;
+
+    &--top {
+      margin-top: $field-label-height;
+      margin-bottom: 0;
+    }
+  }
+
+  // Aligns with the field labels; the chosen category appears below without moving the trigger.
+  &__category {
+    align-self: flex-start;
+    margin-left: auto;
+  }
+
+  &__questions {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: $questions-column-gap;
+    row-gap: $questions-row-gap;
+  }
+
+  &__add-question {
+    align-self: start;
+    justify-self: start;
+  }
+
+  &__footer {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: $field-row-gap;
+    margin-top: $dialog-footer-offset;
+  }
+
+  &__error {
+    @include form-error-text;
+  }
+}

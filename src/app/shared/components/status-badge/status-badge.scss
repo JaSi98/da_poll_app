@@ -1,0 +1,25 @@
+@use '../../../../styles/abstracts/colors' as *;
+@use '../../../../styles/abstracts/typography' as *;
+
+$status-badge-padding: 3px 12px 3px 8px;
+$status-badge-corner-radius: 14px;
+$status-badge-line-height: 20px;
+
+.status-badge {
+  display: inline-block;
+  padding: $status-badge-padding;
+  border-top-right-radius: $status-badge-corner-radius;
+  color: $color-text-dark;
+  font-family: $font-family-secondary;
+  font-size: $font-size-m;
+  font-weight: $font-weight-semibold;
+  line-height: $status-badge-line-height;
+
+  &--draft {
+    background-color: $color-secondary-orange;
+  }
+
+  &--published {
+    background-color: $color-primary-orange;
+  }
+}

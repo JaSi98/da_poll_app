@@ -55,8 +55,18 @@ export class CreateQuestion {
     this.questionForm().controls.isMultipleChoice.setValue(isMultipleChoice);
   }
 
-  /** Asks the survey form to delete this question. */
-  protected requestRemove(): void {
-    this.remove.emit();
+  /** Deletes the question, or only clears its texts if it is the one that must remain. */
+  protected removeOrClear(): void {
+    if (this.canRemove()) {
+      this.remove.emit();
+      return;
+    }
+    this.clearTexts();
+  }
+
+  /** Empties the question text and every answer text, keeping the answer fields. */
+  private clearTexts(): void {
+    this.questionForm().controls.text.setValue('');
+    this.answers.controls.forEach((answerControl) => answerControl.setValue(''));
   }
 }

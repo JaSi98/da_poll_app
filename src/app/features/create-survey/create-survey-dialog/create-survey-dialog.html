@@ -1,0 +1,97 @@
+<dialog
+  #dialog
+  class="create-survey-dialog"
+  aria-labelledby="create-survey-dialog-title"
+  (close)="handleClose()"
+>
+  <form class="create-survey-dialog__form" [formGroup]="surveyForm" (ngSubmit)="publish()">
+    <header class="create-survey-dialog__header">
+      <hgroup class="create-survey-dialog__heading">
+        <app-status-badge status="draft" />
+        <h2 id="create-survey-dialog-title" class="create-survey-dialog__title">
+          Create new survey
+        </h2>
+      </hgroup>
+      <app-button variant="secondary" label="Cancel" icon="close" (buttonClick)="cancel()" />
+    </header>
+
+    <div class="create-survey-dialog__panel">
+      <div class="create-survey-dialog__details">
+        <div class="create-survey-dialog__column">
+          <div class="create-survey-dialog__field-row">
+            <app-text-field
+              class="create-survey-dialog__field"
+              formControlName="title"
+              label="Survey name"
+            />
+            <app-icon-button
+              class="create-survey-dialog__clear"
+              variant="delete"
+              ariaLabel="Clear survey name"
+              (buttonClick)="clearField('title')"
+            />
+          </div>
+          <div class="create-survey-dialog__field-row">
+            <app-text-field
+              class="create-survey-dialog__field create-survey-dialog__field--date"
+              formControlName="endDate"
+              label="Set end date"
+              type="date"
+              [isOptional]="true"
+            />
+            <app-icon-button
+              class="create-survey-dialog__clear"
+              variant="delete"
+              ariaLabel="Clear end date"
+              (buttonClick)="clearField('endDate')"
+            />
+            <app-category-select
+              class="create-survey-dialog__category"
+              formControlName="categoryId"
+            />
+          </div>
+        </div>
+        <div class="create-survey-dialog__field-row create-survey-dialog__field-row--top">
+          <app-text-field
+            class="create-survey-dialog__field"
+            formControlName="description"
+            label="Describing text"
+            [isOptional]="true"
+            [isMultiline]="true"
+          />
+          <app-icon-button
+            class="create-survey-dialog__clear create-survey-dialog__clear--top"
+            variant="delete"
+            ariaLabel="Clear describing text"
+            (buttonClick)="clearField('description')"
+          />
+        </div>
+      </div>
+
+      <div class="create-survey-dialog__questions">
+        @for (questionForm of questions.controls; track questionForm; let questionIndex = $index) {
+          <app-create-question
+            [questionForm]="questionForm"
+            [index]="questionIndex"
+            [canRemove]="questionIndex > 0"
+            (remove)="removeQuestion(questionIndex)"
+          />
+        }
+        <app-button
+          class="create-survey-dialog__add-question"
+          variant="secondary"
+          label="Add next question"
+          icon="add"
+          (buttonClick)="addQuestion()"
+        />
+      </div>
+    </div>
+
+    <footer class="create-survey-dialog__footer">
+      @if (hasPublishError()) {
+        <p class="create-survey-dialog__error" role="alert">Publishing failed. Please try again.</p>
+      }
+      <app-button type="submit" label="Publish" [isDisabled]="isPublishing()" />
+    </footer>
+  </form>
+</dialog>
