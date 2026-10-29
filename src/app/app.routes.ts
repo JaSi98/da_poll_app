@@ -14,5 +14,17 @@ export const routes: Routes = [
         (m) => m.SurveyDetailPage,
       ),
   },
+  {
+    path: 'legal-notice',
+    title: 'Legal notice – Poll App',
+    loadComponent: () =>
+      import('./features/legal/legal-notice/legal-notice').then((m) => m.LegalNotice),
+  },
+  {
+    path: 'privacy-policy',
+    title: 'Privacy policy – Poll App',
+    loadComponent: () =>
+      import('./features/legal/privacy-policy/privacy-policy').then((m) => m.PrivacyPolicy),
+  },
   { path: '**', redirectTo: '' },
 ];

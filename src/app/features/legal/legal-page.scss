@@ -1,0 +1,72 @@
+@use '../../../styles/abstracts/colors' as *;
+@use '../../../styles/abstracts/typography' as *;
+@use '../../../styles/abstracts/mixins' as *;
+
+$legal-max-width: 800px;
+$legal-space-top: 48px;
+$legal-space-bottom: 80px;
+$legal-gap: 32px;
+$legal-section-gap: 8px;
+$legal-text-line-height: 1.5;
+$legal-list-indent: 20px;
+
+$legal-mobile-space-top: 32px;
+
+:host {
+  display: block;
+  min-height: 100dvh;
+  background-color: $color-text-light;
+  color: $color-text-dark;
+}
+
+.legal {
+  @include page-container;
+  display: flex;
+  flex-direction: column;
+  gap: $legal-gap;
+  max-width: $legal-max-width;
+  padding-block: $legal-space-top $legal-space-bottom;
+
+  @include mobile {
+    padding-top: $legal-mobile-space-top;
+  }
+
+  &__title {
+    margin: 0;
+    color: $color-primary-purple;
+    font-family: $font-family-display;
+    font-size: $font-size-display;
+    font-weight: $font-weight-regular;
+    line-height: 1;
+  }
+
+  &__section {
+    display: flex;
+    flex-direction: column;
+    gap: $legal-section-gap;
+  }
+
+  &__heading {
+    margin: 0;
+    font-family: $font-family-base;
+    font-size: $font-size-l;
+    font-weight: $font-weight-bold;
+  }
+
+  &__address,
+  &__text,
+  &__list {
+    margin: 0;
+    font-size: $font-size-m;
+    font-style: normal;
+    line-height: $legal-text-line-height;
+  }
+
+  &__list {
+    padding-left: $legal-list-indent;
+  }
+
+  &__link {
+    color: $color-muted-purple;
+  }
+}

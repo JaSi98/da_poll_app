@@ -4,9 +4,10 @@ import { RouterOutlet } from '@angular/router';
 import { CreateSurveyDialog } from './features/create-survey/create-survey-dialog/create-survey-dialog';
 import { CreateSurveyLauncher } from './features/create-survey/create-survey-launcher';
 import { PublishConfirmation } from './features/create-survey/publish-confirmation/publish-confirmation';
+import { SiteFooter } from './shared/components/site-footer/site-footer';
 
 @Component({
-  imports: [RouterOutlet, CreateSurveyDialog, PublishConfirmation],
+  imports: [RouterOutlet, CreateSurveyDialog, PublishConfirmation, SiteFooter],
   selector: 'app-root',
   styleUrl: './app.scss',
   templateUrl: './app.html',

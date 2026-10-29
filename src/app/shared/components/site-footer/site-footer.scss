@@ -1,0 +1,44 @@
+@use '../../../../styles/abstracts/colors' as *;
+@use '../../../../styles/abstracts/typography' as *;
+@use '../../../../styles/abstracts/mixins' as *;
+
+$site-footer-padding-block: 20px;
+$site-footer-gap: 8px 24px;
+$site-footer-link-offset: 3px;
+
+:host {
+  @include focus-ring-on-dark;
+  display: block;
+  background-color: $color-text-dark;
+  color: $color-text-light;
+}
+
+.site-footer {
+  @include page-container;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: $site-footer-gap;
+  padding-block: $site-footer-padding-block;
+  font-size: $font-size-s;
+
+  &__copyright {
+    margin: 0;
+  }
+
+  &__nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $site-footer-gap;
+  }
+
+  &__link {
+    color: inherit;
+    text-underline-offset: $site-footer-link-offset;
+
+    &:hover {
+      color: $color-primary-orange;
+    }
+  }
+}
